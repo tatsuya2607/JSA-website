@@ -1,14 +1,19 @@
-import './App.css'
 import Home from './pages/Home'
 import Header from './components/Header'
-import './index.css'
+import Culture from './pages/Culture'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
-      <Home />
-    </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/culture" element={<Culture />} />
+      </Routes>
+    </>
+
   );
 }
 
