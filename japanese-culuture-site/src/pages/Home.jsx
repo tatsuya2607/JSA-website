@@ -1,5 +1,5 @@
 import CultureCard from "../components/CultureCard";
-import { cultureData } from "../data/CultureData";
+import { cultureData } from "../data/cultureData";
 
 function Home() {
     return (
@@ -11,6 +11,7 @@ function Home() {
             {cultureData.map((culture) => (
                 <CultureCard
                     key={culture.id}
+                    id={culture.id}
                     title={culture.title}
                     description={culture.description}
                 />
