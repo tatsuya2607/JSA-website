@@ -25,7 +25,7 @@ function Home() {
       </section>
 
       {/* About */}
-      <section className="bg-gray-100 py-20">
+      <section id="about" className="bg-gray-100 py-20">
         <div className="text-black flex flex-col items-center justify-center">
           <h1 className="md:text-3xl font-bold">About Nihon Culture Club</h1>
           <p className="text-sm text-center md:text-base max-w-2xl mt-2">
@@ -37,7 +37,7 @@ function Home() {
       </section>
 
        {/* Japanese Culture */}
-      <section className="bg-white py-20">
+      <section id="culture" className="bg-white py-20">
         <div className="text-black flex flex-col items-center justify-center">
           <h1 className="md:text-3xl font-bold">Japanese Culture</h1>
           <p className="text-sm text-center md:text-base max-w-2xl mt-2">
@@ -47,7 +47,7 @@ function Home() {
       </section>
 
        {/* Upcoming Events */}
-      <section className="bg-gray-100 py-20">
+      <section id="events" className="bg-gray-100 py-20">
         <div className="text-black flex flex-col items-center justify-center">
           <h1 className="md:text-3xl font-bold">Upcoming Events</h1>
           <p className="text-sm text-center md:text-base max-w-2xl mt-2">
@@ -57,7 +57,7 @@ function Home() {
       </section>
 
        {/* Get In Touch */}
-      <section className="bg-white py-20">
+      <section id="contact" className="bg-white py-20">
         <div className="text-black flex flex-col items-center justify-center">
           <h1 className="md:text-3xl font-bold">Get In Touch</h1>
           <p className="text-sm text-center md:text-base max-w-2xl mt-2">

@@ -2,10 +2,11 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-    { name: 'Home', href: '/', current: true },
-    { name: 'Culture', href: '/culture', current: false },
-    { name: 'Events', href: '/events', current: false },
-    { name: 'Contact', href: '#', current: false },
+    { name: 'Home', href: '#home', current: true },
+    { name: 'About', href: '#about', current: false },
+    { name: 'Culture', href: '#culture', current: false },
+    { name: 'Events', href: '#events', current: false },
+    { name: 'Contact', href: '#contact', current: false },
 ]
 
 function classNames(...classes) {
@@ -67,7 +68,7 @@ export default function Example() {
                             href={item.href}
                             aria-current={item.current ? 'page' : undefined}
                             className={classNames(
-                                item.current ? 'bg-gray-950/50 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-blacke',
+                                item.current ? 'bg-gray-950/50 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-black',
                                 'block rounded-md px-3 py-2 text-base font-medium',
                             )}
                         >

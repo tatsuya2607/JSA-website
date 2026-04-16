@@ -1,5 +1,6 @@
 import Home from './pages/Home'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Culture from './pages/Culture'
 import { Route, Routes } from 'react-router-dom'
 import CultureDetail from './pages/CultureDetail'
@@ -20,6 +21,8 @@ function App() {
           <Route path="/culture/:id" element={<CultureDetail />} />
         </Routes>
       </main>
+
+      <Footer />
     </>
 
   );
