@@ -1,3 +1,6 @@
+import AboutCard from "../components/AboutCard";
+import { aboutCardData } from "../data/AboutCardData";
+
 function Home() {
   return (
     // Hero 
@@ -26,41 +29,52 @@ function Home() {
 
       {/* About */}
       <section id="about" className="bg-gray-100 py-20">
-        <div className="text-black flex flex-col items-center justify-center">
-          <h1 className="md:text-3xl font-bold">About Nihon Culture Club</h1>
-          <p className="text-sm text-center md:text-base max-w-2xl mt-2">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-black md:text-4xl font-bold">About Japanese Student Association</h1>
+          <p className="text-gray-500 text-sm text-center md:text-lg max-w-2xl mt-5">
             We are a passionate group of students dedicated to sharing and celebrating Japanese culture.
             Through events, workshops, and cultural exchanges,
             we aim to bridge cultures and create lasting connections within our university community.
           </p>
+          {/* Card */}
+          <div className="mt-5 grid md:grid-cols-3 gap-8">
+            {aboutCardData.map((data) => (
+              <AboutCard
+                key={data.id}
+                icon={data.icon}
+                title={data.title}
+                description={data.description}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-       {/* Japanese Culture */}
+      {/* Japanese Culture */}
       <section id="culture" className="bg-white py-20">
-        <div className="text-black flex flex-col items-center justify-center">
-          <h1 className="md:text-3xl font-bold">Japanese Culture</h1>
-          <p className="text-sm text-center md:text-base max-w-2xl mt-2">
-            Culture 
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-black md:text-3xl font-bold">Japanese Culture</h1>
+          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
+            Culture
           </p>
         </div>
       </section>
 
-       {/* Upcoming Events */}
+      {/* Upcoming Events */}
       <section id="events" className="bg-gray-100 py-20">
-        <div className="text-black flex flex-col items-center justify-center">
-          <h1 className="md:text-3xl font-bold">Upcoming Events</h1>
-          <p className="text-sm text-center md:text-base max-w-2xl mt-2">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-black md:text-3xl font-bold">Upcoming Events</h1>
+          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
             events
           </p>
         </div>
       </section>
 
-       {/* Get In Touch */}
+      {/* Get In Touch */}
       <section id="contact" className="bg-white py-20">
-        <div className="text-black flex flex-col items-center justify-center">
-          <h1 className="md:text-3xl font-bold">Get In Touch</h1>
-          <p className="text-sm text-center md:text-base max-w-2xl mt-2">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-black md:text-3xl font-bold">Get In Touch</h1>
+          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
             contacts
           </p>
         </div>
