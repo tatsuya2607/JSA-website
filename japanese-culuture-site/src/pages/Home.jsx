@@ -1,5 +1,7 @@
 import AboutCard from "../components/AboutCard";
+import CultureSection from "../components/CultureSection"
 import { aboutCardData } from "../data/AboutCardData";
+import {cultureData } from "../data/CultureData";
 
 function Home() {
   return (
@@ -53,10 +55,23 @@ function Home() {
       {/* Japanese Culture */}
       <section id="culture" className="bg-white py-20">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-black md:text-3xl font-bold">Japanese Culture</h1>
-          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
-            Culture
+          <h1 className="text-black md:text-4xl font-bold">Japanese Culture</h1>
+          <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5 mb-1">
+            Explore the diverse and fascinating aspects of Japanese culture, from ancient traditions to modern innovations.
           </p>
+          <div>
+            {cultureData.map((data, index)=>(
+              <CultureSection
+              key={data.id}
+              tag={data.tag}
+              title={data.title}
+              description={data.description}
+              image={data.image}
+              isReversed={index%2 === 0}
+              items={data.items}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
