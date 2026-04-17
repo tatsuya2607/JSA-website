@@ -1,7 +1,9 @@
 import AboutCard from "../components/AboutCard";
 import CultureSection from "../components/CultureSection"
+import EventCard from "../components/EventCard";
 import { aboutCardData } from "../data/AboutCardData";
-import {cultureData } from "../data/CultureData";
+import { cultureData } from "../data/CultureData";
+import { eventData } from "../data/EventData";
 
 function Home() {
   return (
@@ -60,15 +62,15 @@ function Home() {
             Explore the diverse and fascinating aspects of Japanese culture, from ancient traditions to modern innovations.
           </p>
           <div>
-            {cultureData.map((data, index)=>(
+            {cultureData.map((data, index) => (
               <CultureSection
-              key={data.id}
-              tag={data.tag}
-              title={data.title}
-              description={data.description}
-              image={data.image}
-              isReversed={index%2 === 0}
-              items={data.items}
+                key={data.id}
+                tag={data.tag}
+                title={data.title}
+                description={data.description}
+                image={data.image}
+                isReversed={index % 2 === 0}
+                items={data.items}
               />
             ))}
           </div>
@@ -79,9 +81,22 @@ function Home() {
       <section id="events" className="bg-gray-100 py-20">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-black md:text-3xl font-bold">Upcoming Events</h1>
-          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
-            events
+          <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5">
+            Join us for exciting cultural events and activities throughout the semester.
           </p>
+          <div className="mt-5 grid md:grid-cols-3 gap-8">
+            {eventData.map((data) => (
+              <EventCard
+                key={data.id}
+                tag={data.tag}
+                date={data.date}
+                title={data.title}
+                description={data.description}
+                place={data.place}
+                icon={data.icon}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -89,8 +104,8 @@ function Home() {
       <section id="contact" className="bg-white py-20">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-black md:text-3xl font-bold">Get In Touch</h1>
-          <p className="text-gray-500 text-sm text-center md:text-base max-w-2xl mt-5">
-            contacts
+          <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5">
+            Interested in joining our community or learning more about Japanese culture? We'd love to hear from you!
           </p>
         </div>
       </section>

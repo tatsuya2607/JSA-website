@@ -1,10 +1,10 @@
 function CultureSection({ tag, title, description, image, isReversed, items }) {
     return (
         <section className="w-screen py-5">
-            <div className={`max-w-[1700px] mx-auto flex flex-col md:flex-row gap-12 px-0 py-6 
+            <div
+                className={`max-w-[1700px] mx-auto flex flex-col md:flex-row gap-12 px-0 py-6 
        ${isReversed ? "md:flex-row" : "md:flex-row-reverse"}`}
             >
-
                 {/* TEXT */}
                 <div className="flex-1 text-left items-start mt-4 pl-0">
                     <span className="inline-block mb-2 px-3 py-1 text-sm bg-black text-white rounded-full">
@@ -20,9 +20,9 @@ function CultureSection({ tag, title, description, image, isReversed, items }) {
                     </p>
 
                     {/* LIST */}
-                    <ul className="text-gray-600 space-y-2">
+                    <ul className="list-disc list-inside text-gray-600 space-y-2">
                         {items.map((item, index) => (
-                            <li key={index}>• {item}</li>
+                            <li key={index}>{item}</li>
                         ))}
                     </ul>
                 </div>
@@ -35,7 +35,6 @@ function CultureSection({ tag, title, description, image, isReversed, items }) {
                         className="w-full h-[380px] object-cover rounded-xl"
                     />
                 </div>
-
             </div>
         </section>
     );
