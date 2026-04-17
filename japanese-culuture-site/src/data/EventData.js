@@ -5,37 +5,43 @@ import {
 
 export const eventData = [
   {
-    id: 1,
+    id: "evt_2026_hanami_picnic",
+    slug: "hanami-picnic-2026",
     title: "Hanami Picnic",
-    description: "Enjoy cherry blossoms with traditional snacks in the park.",
-    eventDate: "2026-04-05",   // YYYY-MM-DD
-    location: "Ueno Park, Tokyo",
-    category: "Seasonal",
-    image: null,
-    isPublished: true,
+    summary: "Enjoy cherry blossoms with traditional snacks in the park.",
+    startAt: "2026-04-05T11:00:00+09:00",
+    timezone: "Asia/Tokyo",
+    venueName: "Ueno Park, Tokyo",
+    category: "seasonal",
+    imageUrl: null,
+    status: "published",
     icon: MapPinIcon
   },
   {
-    id: 2,
+    id: "evt_2026_summer_matsuri_night",
+    slug: "summer-matsuri-night-2026",
     title: "Summer Matsuri Night",
-    description: "Festival stalls, taiko performances, and fireworks.",
-    eventDate: "2026-07-20",
-    location: "Asakusa, Tokyo",
-    category: "Festival",
-    image: null,
-    isPublished: true,
+    summary: "Festival stalls, taiko performances, and fireworks.",
+    startAt: "2026-07-20T18:00:00+09:00",
+    timezone: "Asia/Tokyo",
+    venueName: "Asakusa, Tokyo",
+    category: "festival",
+    imageUrl: null,
+    status: "published",
     icon: MapPinIcon
   },
   {
-    id: 3,
+    id: "evt_2026_tea_ceremony_workshop",
+    slug: "tea-ceremony-workshop-2026",
     title: "Tea Ceremony Workshop",
-    description: "Beginner-friendly tea ceremony experience.",
-    eventDate: "2026-09-12",
-    location: "Kyoto Cultural Center",
-    category: "Workshop",
-    image: null,
-    isPublished: false,
-    icon:  MapPinIcon
+    summary: "Beginner-friendly tea ceremony experience.",
+    startAt: "2026-09-12T13:00:00+09:00",
+    timezone: "Asia/Tokyo",
+    venueName: "Kyoto Cultural Center",
+    category: "workshop",
+    imageUrl: null,
+    status: "draft",
+    icon: MapPinIcon
   }
 
 ];

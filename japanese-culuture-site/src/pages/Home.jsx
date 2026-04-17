@@ -9,6 +9,10 @@ import { eventData } from "../data/EventData";
 import { contactData } from "../data/ContactData";
 
 function Home() {
+  const publishedEvents = eventData
+    .filter((event) => event.status === "published")
+    .sort((a, b) => new Date(a.startAt) - new Date(b.startAt));
+
   return (
     // Hero 
     <>
@@ -88,14 +92,14 @@ function Home() {
             Join us for exciting cultural events and activities throughout the semester.
           </p>
           <div className="mt-5 grid md:grid-cols-3 gap-8">
-            {eventData.map((data) => (
+            {publishedEvents.map((data) => (
               <EventCard
                 key={data.id}
-                tag={data.tag}
-                date={data.date}
+                category={data.category}
+                startAt={data.startAt}
                 title={data.title}
-                description={data.description}
-                place={data.place}
+                summary={data.summary}
+                venueName={data.venueName}
                 icon={data.icon}
               />
             ))}
