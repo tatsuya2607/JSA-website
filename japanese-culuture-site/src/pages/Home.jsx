@@ -1,15 +1,18 @@
 import AboutCard from "../components/AboutCard";
 import CultureSection from "../components/CultureSection"
 import EventCard from "../components/EventCard";
+import ContactCard from "../components/contactCard";
+import SnsButton from "../components/SnsButton";
 import { aboutCardData } from "../data/AboutCardData";
 import { cultureData } from "../data/CultureData";
 import { eventData } from "../data/EventData";
+import { contactData } from "../data/ContactData";
 
 function Home() {
   return (
     // Hero 
     <>
-      <section className="relative w-full h-[650px]">
+      <section id="home" className="relative w-full h-[650px]">
         {/* 背景画像 */}
         <img
           src="https://images.unsplash.com/photo-1528164344705-47542687000d"
@@ -107,6 +110,20 @@ function Home() {
           <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5">
             Interested in joining our community or learning more about Japanese culture? We'd love to hear from you!
           </p>
+          <div className="mt-5 grid md:grid-cols-2 gap-8">
+            {contactData.map((data) => (
+              <ContactCard
+                key={data.id}
+                title={data.title}
+                description={data.description}
+                icon={data.icon}
+                href={data.href}
+              />
+            ))}
+          </div>
+          <div className="mt-8">
+            <SnsButton />
+          </div>
         </div>
       </section>
     </>
