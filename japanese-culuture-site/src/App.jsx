@@ -1,19 +1,28 @@
 import Home from './pages/Home'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Culture from './pages/Culture'
 import { Route, Routes } from 'react-router-dom'
 import CultureDetail from './pages/CultureDetail'
+import About from './pages/About'
+import Events from './pages/Events'
 
 function App() {
   return (
     <>
       <Header />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/culture" element={<Culture />} />
-        <Route path="/culture/:id" element={<CultureDetail />} />
-      </Routes>
+      <main className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/culture" element={<Culture />} />
+          <Route path="/culture/:id" element={<CultureDetail />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </>
 
   );
