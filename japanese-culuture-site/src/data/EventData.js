@@ -6,32 +6,36 @@ import {
 export const eventData = [
   {
     id: 1,
-    tag: "workshop",
-    date: "Feb 15",
-    title: "Origami Workshop",
-    description: `Learn the ancient art of paper folding with traditional techniques and modern creativity.`,
-    place: "Student Center Room 201",
+    title: "Hanami Picnic",
+    description: "Enjoy cherry blossoms with traditional snacks in the park.",
+    eventDate: "2026-04-05",   // YYYY-MM-DD
+    location: "Ueno Park, Tokyo",
+    category: "Seasonal",
+    image: null,
+    isPublished: true,
     icon: MapPinIcon
   },
-
   {
     id: 2,
-    tag: "festival",
-    date: "Feb 22",
-    title: "Mini Hanami Celebration",
-    description: `Celebrate cherry blossom season with traditional games, food, and cultural performances.`,
-    place: "University Garden",
+    title: "Summer Matsuri Night",
+    description: "Festival stalls, taiko performances, and fireworks.",
+    eventDate: "2026-07-20",
+    location: "Asakusa, Tokyo",
+    category: "Festival",
+    image: null,
+    isPublished: true,
     icon: MapPinIcon
   },
-
   {
     id: 3,
-    tag: "Language",
-    date: "Mar 1",
-    title: "Japanese Language Exchange",
-    description: `Practice Japanese conversation skills with native speakers in a friendly environment.`,
-    place: "Library Study Room B",
-    icon: MapPinIcon
-  },
+    title: "Tea Ceremony Workshop",
+    description: "Beginner-friendly tea ceremony experience.",
+    eventDate: "2026-09-12",
+    location: "Kyoto Cultural Center",
+    category: "Workshop",
+    image: null,
+    isPublished: false,
+    icon:  MapPinIcon
+  }
 
 ];
