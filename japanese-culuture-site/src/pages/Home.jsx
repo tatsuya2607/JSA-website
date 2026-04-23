@@ -1,17 +1,39 @@
+import { useEffect, useState } from "react";
 import AboutCard from "../components/AboutCard";
 import CultureSection from "../components/CultureSection"
 import EventCard from "../components/EventCard";
-import ContactCard from "../components/contactCard";
+import ContactCard from "../components/ContactCard";
 import SnsButton from "../components/SnsButton";
 import { aboutCardData } from "../data/AboutCardData";
 import { cultureData } from "../data/CultureData";
-import { eventData } from "../data/EventData";
 import { contactData } from "../data/ContactData";
+import { getEvents } from "../api/events";
 
 function Home() {
-  const publishedEvents = eventData
-    .filter((event) => event.status === "published")
-    .sort((a, b) => new Date(a.startAt) - new Date(b.startAt));
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+
+      try {
+      const data = await getEvents();
+      setEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const publishedEvents = events.slice(0, 3);
+
+  const eventGridColumns =
+    publishedEvents.length <= 1
+      ? "md:grid-cols-1"
+      : publishedEvents.length === 2
+        ? "md:grid-cols-2"
+        : "md:grid-cols-2 xl:grid-cols-3";
 
   return (
     // Hero 
@@ -91,19 +113,25 @@ function Home() {
           <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5">
             Join us for exciting cultural events and activities throughout the semester.
           </p>
-          <div className="mt-5 grid md:grid-cols-3 gap-8">
-            {publishedEvents.map((data) => (
-              <EventCard
-                key={data.id}
-                category={data.category}
-                startAt={data.startAt}
-                title={data.title}
-                summary={data.summary}
-                venueName={data.venueName}
-                icon={data.icon}
-              />
-            ))}
-          </div>
+
+          {publishedEvents.length > 0 ? (
+            <div className={`mt-5 grid w-full max-w-6xl grid-cols-1 gap-8 px-4 justify-items-center ${eventGridColumns}`}>
+              {publishedEvents.map((data) => (
+                <EventCard
+                  key={data.id}
+                  category={data.category}
+                  startAt={data.startAt}
+                  title={data.title}
+                  summary={data.summary}
+                  venueName={data.venueName}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 w-full max-w-2xl rounded-lg border border-dashed border-gray-300 bg-white p-6 text-center text-gray-500">
+              There are currently no upcoming events. Please check back soon!
+            </div>
+          )}
         </div>
       </section>
 
