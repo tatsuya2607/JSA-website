@@ -9,7 +9,7 @@ const SnsButton = () => {
                     href={sns.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-500 hover:text-white"
                 >
                     <sns.icon size={20} />
                 </a>
