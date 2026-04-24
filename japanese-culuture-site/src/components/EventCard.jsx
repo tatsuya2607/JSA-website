@@ -1,4 +1,8 @@
-function EventCard({ category, startAt, title, summary, venueName, icon: Icon }) {
+import {
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
+
+function EventCard({ category, startAt, title, summary, venueName }) {
     const eventDate = new Date(startAt);
     const formattedDate = Number.isNaN(eventDate.getTime())
         ? "TBD"
@@ -8,8 +12,10 @@ function EventCard({ category, startAt, title, summary, venueName, icon: Icon })
             day: "numeric"
         });
 
+    const Icon = MapPinIcon;
+
     return (
-        <div className="block max-w-md p-6 bg-white border border-gray-200 rounded-lg 
+        <div className="block w-full max-w-md p-6 bg-white border border-gray-200 rounded-lg 
             shadow-sm mt-7">
 
 
@@ -27,7 +33,7 @@ function EventCard({ category, startAt, title, summary, venueName, icon: Icon })
 
             <div className="flex flex-col items-start text-left">
                 {/* title */}
-                <h5 className="mb-2 text-md tracking-tight text-black">
+                <h5 className="mb-2 text-lg tracking-tight text-black">
                     {title}
                 </h5>
                 {/* summary */}
