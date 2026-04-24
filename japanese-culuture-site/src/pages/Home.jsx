@@ -151,7 +151,7 @@ function Home() {
           <p className="text-gray-500 text-sm text-center md:text-xl max-w-2xl mt-5">
             Interested in joining our community or learning more about Japanese culture? We'd love to hear from you!
           </p>
-          <div className="mt-5 grid md:grid-cols-2 gap-8">
+          <div className="mt-12 grid w-full max-w-4xl grid-cols-1 gap-6 px-4 md:grid-cols-2 md:gap-10">
             {contactData.map((data) => (
               <ContactCard
                 key={data.id}

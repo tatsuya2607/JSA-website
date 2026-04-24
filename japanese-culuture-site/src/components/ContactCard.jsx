@@ -1,30 +1,31 @@
 function ContactCard({ icon: Icon, title, description, href }) {
-      const Container = href ? 'a' : 'div';
+      const Container = href ? "a" : "div";
       const containerProps = href
         ? {
             href,
             className:
-              'block max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-sm mt-7 transition hover:shadow-lg hover:border-blue-200 hover:bg-blue-50',
+              "group flex w-full max-w-md flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all duration-300 hover:border-indigo-100 hover:bg-white hover:shadow-xl",
           }
         : {
-            className: 'block max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-sm mt-7',
+            className:
+              "group flex w-full max-w-md flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all duration-300 hover:border-indigo-100 hover:bg-white hover:shadow-xl",
           };
 
       return (
         <Container {...containerProps}>
-            <div className="flex justify-center mb-4">
-                <Icon className="w-10 h-10 text-red-500" />
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100 text-pink-500 transition-all duration-300 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white">
+                <Icon className="h-6 w-6" />
             </div>
 
-            <h5 className="mb-2 text-md tracking-tight text-black text-center">
+            <h5 className="mb-2 text-center text-base font-bold text-slate-800">
                 {title}
             </h5>
 
             <p
-                className={`font-normal p-3 text-center ${
+                className={`text-center text-sm ${
                   href
-                    ? 'text-blue-700 underline underline-offset-4 decoration-blue-300 hover:text-blue-900'
-                    : 'text-gray-500'
+                    ? "font-medium text-indigo-600"
+                    : "text-slate-500"
                 }`}
             >
                 {description}
