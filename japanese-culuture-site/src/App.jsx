@@ -2,7 +2,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Culture from './pages/Culture'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import CultureDetail from './pages/CultureDetail'
 import About from './pages/About'
 import Events from './pages/Events'
@@ -13,11 +13,14 @@ import AdminLogin from './pages/AdminLogin'
 import AdminTeam from './pages/AdminTeam'
 
 function App() {
+  const { pathname } = useLocation();
+  const isAdminRoute = pathname.startsWith('/admin');
+
   return (
     <>
-      <Header />
+      {!isAdminRoute && <Header />}
 
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -32,7 +35,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </>
 
   );
