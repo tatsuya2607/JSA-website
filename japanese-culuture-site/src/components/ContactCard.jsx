@@ -1,4 +1,4 @@
-function ContactCard({ icon, title, description, href }) {
+function ContactCard({ icon: Icon, title, description, href }) {
       const Container = href ? "a" : "div";
       const containerProps = href
         ? {
@@ -14,7 +14,7 @@ function ContactCard({ icon, title, description, href }) {
       return (
         <Container {...containerProps}>
             <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100 text-pink-500 transition-all duration-300 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white">
-                {icon({ className: "h-6 w-6" })}
+                <Icon className="h-6 w-6" />
             </div>
 
             <h5 className="mb-2 text-center text-base font-bold text-slate-800">
