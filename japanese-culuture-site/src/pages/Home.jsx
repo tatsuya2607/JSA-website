@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AboutCard from "../components/AboutCard";
+import TeamSection from "../components/TeamSection";
 import CultureSection from "../components/CultureSection"
 import EventCard from "../components/EventCard";
 import ContactCard from "../components/ContactCard";
@@ -103,6 +104,7 @@ function Home() {
             ))}
           </div>
         </div>
+        <TeamSection />
       </section>
 
       {/* Japanese Culture */}
