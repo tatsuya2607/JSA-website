@@ -10,21 +10,6 @@ function Footer() {
                         Japanese Student Association
                     </h2>
 
-                    {/* ナビ */}
-                    <div className="flex justify-center gap-6 mb-4 text-sm">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#culture">Culture</a>
-                        <a href="#events">Events</a>
-                        <a href="#contact">Contact</a>
-                    </div>
-
-                    {/* SNS */}
-                    {/* <div className="flex justify-center gap-4 mb-4">
-                        <a href="#">Instagram</a>
-                        <a href="#">Twitter</a>
-                    </div> */}
-
                     {/* コピーライト */}
                     <p className="text-gray-400 text-sm">
                         © 2026 Nihon Culture Club. All rights reserved.
