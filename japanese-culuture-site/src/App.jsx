@@ -1,6 +1,7 @@
 import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import AdminNavbar from './components/AdminNavbar'
 import Culture from './pages/Culture'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import CultureDetail from './pages/CultureDetail'
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       {!isAdminRoute && <Header />}
+      {isAdminRoute && <AdminNavbar />}
 
       <main className="min-h-screen bg-gray-100">
         <Routes>

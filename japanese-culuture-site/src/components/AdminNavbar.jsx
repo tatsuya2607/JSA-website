@@ -26,8 +26,8 @@ function AdminNavbar() {
   }
 
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 p-4 md:px-6">
+    <header className="fixed top-0 z-50 w-full border-b border-slate-200 bg-white">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-2 sm:px-6 lg:px-8">
         <p className="text-lg font-bold text-slate-900">JSA Admin</p>
 
         <nav className="flex flex-wrap items-center gap-1">

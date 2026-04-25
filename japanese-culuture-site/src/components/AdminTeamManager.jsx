@@ -92,7 +92,7 @@ function AdminTeamManager() {
   }
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-10 px-6 py-14 lg:grid-cols-[1fr_1.4fr]">
+    <section className="mx-auto grid max-w-6xl gap-10 px-6 py-10 lg:grid-cols-[1fr_1.4fr]">
       <form
         onSubmit={handleSubmit}
         className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"

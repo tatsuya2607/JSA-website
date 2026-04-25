@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { createEvent, getEvents } from "../api/events";
 import {
@@ -8,7 +8,6 @@ import {
   toCategoryLabel,
 } from "../constants/eventSchema";
 import { auth } from "../firebase/firebase";
-import AdminNavbar from "../components/AdminNavbar";
 
 const initialFormData = {
   title: "",
@@ -73,14 +72,17 @@ function AdminEvents() {
   }
 
   return (
-    <section className="min-h-screen bg-gray-100">
-      <AdminNavbar />
-
+    <section className="min-h-screen bg-gray-100 pt-10 text-slate-900">
       <div className="mx-auto max-w-6xl p-6">
         <header className="mb-6">
           <h1 className="text-2xl font-bold text-slate-900">Events Management</h1>
           <p className="text-gray-500">Create, review, and organize event details.</p>
         </header>
+        <div>
+          <Link to="/admin" className="mb-6 inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+            ← Back to admin dashboard
+          </Link>
+        </div>
 
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
           <form onSubmit={handleSubmit} className="space-y-4 rounded-xl bg-white p-6 shadow-md">
@@ -173,7 +175,7 @@ function AdminEvents() {
           </div>
         </div>
       </div>
-    </AdminLayout>
+    </section>
   );
 }
 
