@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AboutCard from "../components/AboutCard";
 import CultureSection from "../components/CultureSection"
 import EventCard from "../components/EventCard";
@@ -12,6 +12,7 @@ import { getEvents } from "../api/events";
 
 function Home() {
   const [events, setEvents] = useState([]);
+  const { hash } = useLocation();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +27,18 @@ function Home() {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    if (!hash) return;
+
+    const sectionId = hash.replace("#", "");
+    const target = document.getElementById(sectionId);
+
+    if (!target) return;
+
+    const y = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, [hash]);
+
 
   const publishedEvents = events.slice(0, 3);
 
@@ -58,6 +71,14 @@ function Home() {
           <p className="text-white mt-4 text-lg md:text-xl max-w-2xl">
             Explore the rich heritage, traditions, and modern culture of Japan through our student community
           </p>
+        </div>
+      </section>
+
+      <section className="bg-white py-8 border-b border-gray-100">
+        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 px-4">
+          <a href="#events" className="rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100">Upcoming Events</a>
+          <a href="#about" className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100">About</a>
+          <a href="#contact" className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-100">Contact</a>
         </div>
       </section>
 
