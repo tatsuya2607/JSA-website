@@ -20,7 +20,7 @@ function AdminLogin() {
       navigate("/admin");
     } catch (error) {
       console.error("Admin login failed:", error);
-      setErrorMessage("ログインに失敗しました。メールアドレスとパスワードを確認してください。");
+      setErrorMessage("Login failed. Please check your email and password.");
     } finally {
       setIsSubmitting(false);
     }
@@ -31,9 +31,9 @@ function AdminLogin() {
       <div className="mx-auto flex max-w-5xl items-center justify-center">
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">Admin</p>
-          <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">管理者ログイン</h1>
+          <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">Admin Login</h1>
           <p className="mt-2 text-sm text-slate-600">
-            ダッシュボードにアクセスするため、管理者アカウントでログインしてください。
+            Sign in with your admin account to access the dashboard.
           </p>
 
           <form onSubmit={handleLogin} className="mt-8 space-y-5">
@@ -78,13 +78,13 @@ function AdminLogin() {
               disabled={isSubmitting}
               className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "Signing in..." : "ログイン"}
+              {isSubmitting ? "Signing in..." : "Log In"}
             </button>
           </form>
 
           <div className="mt-6 border-t border-slate-200 pt-4 text-sm text-slate-500">
             <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-700">
-              ← サイトトップへ戻る
+              ← Back to Website
             </Link>
           </div>
         </div>
