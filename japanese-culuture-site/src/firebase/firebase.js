@@ -2,9 +2,10 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSy...",
+  apiKey: "AIzaSyD1JgowtUSsM2UZZC4ttBGDKnpwAtDsJiY",
   authDomain: "japanese-culture-96191.firebaseapp.com",
   projectId: "japanese-culture-96191",
   storageBucket: "japanese-culture-96191.firebasestorage.app",
@@ -15,3 +16,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
+export const auth = getAuth(app);
