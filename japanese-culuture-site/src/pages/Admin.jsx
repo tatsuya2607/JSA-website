@@ -27,10 +27,10 @@ const dashboardCards = [
   },
   {
     title: "Team Management",
-    description: "Add, update, and reorder leadership members.",
+    description: "メンバー情報の追加・編集・表示順の管理を行います。",
     icon: UsersIcon,
     href: "/admin/team",
-    actionLabel: "Open Team",
+    actionLabel: "チーム管理へ",
   },
 ];
 
