@@ -6,6 +6,7 @@ const navigation = [
   { name: 'Home', to: '/' },
   { name: 'Events', to: '/events' },
   { name: 'Culture', to: '/culture' },
+  { name: 'Contact', to: '/#contact' },
 ]
 
 function getLinkClass(isActive) {
@@ -14,8 +15,6 @@ function getLinkClass(isActive) {
     'rounded-md px-3 py-2 text-sm font-medium',
   ].join(' ')
 }
-
-const ctaClassName = 'inline-flex rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-500'
 
 export default function Navbar() {
   return (
@@ -34,7 +33,7 @@ export default function Navbar() {
             </DisclosureButton>
           </div>
 
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
               <NavLink to="/" className="text-lg font-semibold text-gray-900">
                 JSA
@@ -53,12 +52,6 @@ export default function Navbar() {
                   </NavLink>
                 ))}
               </div>
-            </div>
-
-            <div className="hidden sm:flex sm:items-center">
-              <NavLink to="/#contact" className={ctaClassName}>
-                Contact Us
-              </NavLink>
             </div>
           </div>
         </div>
@@ -79,9 +72,6 @@ export default function Navbar() {
               {item.name}
             </DisclosureButton>
           ))}
-          <DisclosureButton as={NavLink} to="/#contact" className={`${ctaClassName} mt-3 w-full justify-center`}>
-            Contact Us
-          </DisclosureButton>
         </div>
       </DisclosurePanel>
     </Disclosure>
