@@ -1,12 +1,11 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Home', to: '/' },
+  { name: 'Home', to: '/', end: true },
   { name: 'Events', to: '/events' },
   { name: 'Culture', to: '/culture' },
-  { name: 'Contact', to: '/#contact' },
 ]
 
 function getLinkClass(isActive) {
@@ -46,6 +45,7 @@ export default function Navbar() {
                   <NavLink
                     key={item.name}
                     to={item.to}
+                    end={item.end}
                     className={({ isActive }) => getLinkClass(isActive)}
                   >
                     {item.name}
@@ -53,6 +53,15 @@ export default function Navbar() {
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="hidden sm:block">
+            <Link
+              to="/#contact"
+              className="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
       </div>
@@ -64,6 +73,7 @@ export default function Navbar() {
               key={item.name}
               as={NavLink}
               to={item.to}
+              end={item.end}
               className={({ isActive }) => [
                 isActive ? 'bg-gray-950/50 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-black',
                 'block rounded-md px-3 py-2 text-base font-medium',
@@ -72,6 +82,13 @@ export default function Navbar() {
               {item.name}
             </DisclosureButton>
           ))}
+          <DisclosureButton
+            as={Link}
+            to="/#contact"
+            className="mt-3 block rounded-full bg-emerald-600 px-3 py-2 text-base font-semibold text-white transition-colors hover:bg-emerald-700"
+          >
+            Contact Us
+          </DisclosureButton>
         </div>
       </DisclosurePanel>
     </Disclosure>
