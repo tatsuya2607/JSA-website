@@ -25,11 +25,11 @@ const dashboardCards = [
     actionLabel: "サイトを確認",
   },
   {
-    title: "Community Overview",
-    description: "参加者とのコミュニケーション導線を確認します。",
+    title: "Team Management",
+    description: "メンバー情報の追加・編集・表示順の管理を行います。",
     icon: UsersIcon,
-    href: "/contact",
-    actionLabel: "連絡先を見る",
+    href: "/admin/team",
+    actionLabel: "チーム管理へ",
   },
 ];
 

@@ -10,6 +10,7 @@ import EventDetail from './pages/EventDetail'
 import AdminEvents from './pages/AdminEvents'
 import Admin from './pages/Admin'
 import AdminLogin from './pages/AdminLogin'
+import AdminTeam from './pages/AdminTeam'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/events" element={<AdminEvents />} />
+          <Route path="/admin/team" element={<AdminTeam />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/culture" element={<Culture />} />
           <Route path="/culture/:id" element={<CultureDetail />} />
