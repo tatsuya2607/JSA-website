@@ -8,10 +8,12 @@ import {
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { getEvents } from "../api/events";
 
+// Custom hook to detect when an element is in the viewport
 function useInView(options = { threshold: 0.1 }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
+  // To load events when they come into view
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
@@ -27,6 +29,7 @@ function useInView(options = { threshold: 0.1 }) {
   return [ref, isInView];
 }
 
+// Component to wrap content with a fade-in animation when it comes into view
 function FadeIn({ children, delay = 0, direction = "up", className = "" }) {
   const [ref, isInView] = useInView({ threshold: 0.1 });
 
@@ -87,6 +90,7 @@ function Events() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  // Fetch events data on component mount
   useEffect(() => {
     async function fetchEvents() {
       try {
@@ -100,6 +104,7 @@ function Events() {
     fetchEvents();
   }, []);
 
+  // Compute unique categories from events data
   const categories = useMemo(() => {
     const unique = new Set(
       events
@@ -119,7 +124,9 @@ function Events() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+      {/* Hero section */}
       <section className="relative flex h-[60vh] items-center justify-center overflow-hidden md:h-[70vh]">
+        {/* Hero image */}
         <div
           className="absolute inset-0 scale-105 bg-cover bg-center bg-no-repeat transition-transform duration-[10000ms] ease-linear hover:scale-110"
           style={{
@@ -129,16 +136,15 @@ function Events() {
         >
           <div className="absolute inset-0 bg-slate-900/40" />
         </div>
-
-        <div className="relative z-10 mt-16 px-4 text-center">
-          <FadeIn direction="up" delay={100}>
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-white/80">Frame 3</p>
-          </FadeIn>
+        {/* Hero content */}
+        <div className="relative z-10 mt-10 px-4 text-center">
+          {/* Title */}
           <FadeIn direction="up" delay={300}>
             <h1 className="mb-6 font-serif text-5xl font-bold tracking-wide text-white drop-shadow-lg md:text-7xl">
               Events
             </h1>
           </FadeIn>
+          {/* Subtitle */}
           <FadeIn direction="up" delay={500}>
             <p className="text-lg font-medium text-white/90 drop-shadow-md md:text-xl">
               Upcoming Festivals &amp; Workshops
@@ -147,6 +153,7 @@ function Events() {
         </div>
       </section>
 
+      {/* Filter and Events Grid */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
         <div className="mb-12 flex justify-end">
           <div className="relative">
@@ -161,6 +168,7 @@ function Events() {
               />
             </button>
 
+            {/* Dropdown menu */}
             {isFilterOpen && (
               <div className="absolute right-0 z-20 mt-2 w-48 rounded-xl border border-slate-100 bg-white py-2 shadow-xl">
                 {categories.map((category) => (
@@ -185,6 +193,7 @@ function Events() {
           </div>
         </div>
 
+        {/* Events Grid */}
         {filteredEvents.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 md:gap-12">
             {filteredEvents.map((event, index) => {

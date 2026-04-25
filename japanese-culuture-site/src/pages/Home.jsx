@@ -129,12 +129,6 @@ function Home() {
                   />
                 ))}
               </div>
-              <Link
-                to="/events"
-                className="mt-8 inline-flex items-center rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
-              >
-                View all events
-              </Link>
             </>
           ) : (
             <div className="mt-8 w-full max-w-2xl rounded-lg border border-dashed border-gray-300 bg-white p-6 text-center text-gray-500">
