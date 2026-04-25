@@ -98,7 +98,7 @@ function Admin() {
           })}
         </div>
       </div>
-    </section>
+    </AdminLayout>
   );
 }
 

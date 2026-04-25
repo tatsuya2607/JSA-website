@@ -173,7 +173,7 @@ function AdminEvents() {
           </div>
         </div>
       </div>
-    </section>
+    </AdminLayout>
   );
 }
 
