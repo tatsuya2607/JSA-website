@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { cultureData } from "../data/cultureData";
+import { cultureData } from "../data/CultureData";
 
 function CultureDetail() {
     // Get the ID from the URL parameters
