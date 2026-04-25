@@ -141,6 +141,14 @@ function Home() {
               There are currently no upcoming events. Please check back soon!
             </div>
           )}
+          {publishedEvents.length > 0 && (
+            <div className="mt-8">
+              <a href="/events" className="inline-block px-6 py-3 
+                bg-red-600 text-white rounded-lg hover:bg-red-400 transition-colors">
+                View All Events
+              </a>
+            </div>
+          )}
         </div>
       </section>
 
