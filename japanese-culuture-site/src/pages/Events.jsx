@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   ChevronDownIcon,
   ArrowRightIcon,
@@ -7,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { getEvents } from "../api/events";
+import { EVENT_CATEGORIES, toCategoryLabel } from "../constants/eventSchema";
 
 // Custom hook to detect when an element is in the viewport
 function useInView(options = { threshold: 0.1 }) {
@@ -69,14 +71,6 @@ function formatDate(startAt) {
   });
 }
 
-function toLabel(value) {
-  if (!value) return "Other";
-  return value
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
 const tagColorMap = {
   Culture: "bg-emerald-100 text-emerald-700",
   Workshop: "bg-indigo-100 text-indigo-700",
@@ -87,7 +81,12 @@ const tagColorMap = {
 
 function Events() {
   const [events, setEvents] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedFromUrl = searchParams.get("category");
+  const initialCategory = selectedFromUrl
+    ? toCategoryLabel(selectedFromUrl)
+    : "All";
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Fetch events data on component mount
@@ -106,22 +105,30 @@ function Events() {
 
   // Compute unique categories from events data
   const categories = useMemo(() => {
-    const unique = new Set(
-      events
-        .map((event) => event.category)
-        .filter(Boolean)
-        .map((category) => toLabel(category))
-    );
-
-    return ["All", ...unique];
-  }, [events]);
+    return ["All", ...EVENT_CATEGORIES.map((category) => toCategoryLabel(category))];
+  }, []);
 
   const filteredEvents = useMemo(() => {
     if (activeCategory === "All") return events;
 
-    return events.filter((event) => toLabel(event.category) === activeCategory);
+    return events.filter((event) => toCategoryLabel(event.category) === activeCategory);
   }, [activeCategory, events]);
 
+
+  useEffect(() => {
+    if (activeCategory === "All") {
+      setSearchParams({});
+      return;
+    }
+
+    const categoryValue = EVENT_CATEGORIES.find(
+      (category) => toCategoryLabel(category) === activeCategory
+    );
+
+    if (categoryValue) {
+      setSearchParams({ category: categoryValue });
+    }
+  }, [activeCategory, setSearchParams]);
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       {/* Hero section */}
@@ -197,10 +204,11 @@ function Events() {
         {filteredEvents.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 md:gap-12">
             {filteredEvents.map((event, index) => {
-              const categoryLabel = toLabel(event.category);
+              const categoryLabel = toCategoryLabel(event.category);
               return (
                 <FadeIn key={event.id} delay={index * 150} direction="up">
-                  <article className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                  <Link to={`/events/${event.id}`} className="group block h-full">
+                  <article className="flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                     <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                       <div className="absolute inset-0 z-10 bg-black/20 transition-colors duration-500 group-hover:bg-transparent" />
                       {event.imageUrl ? (
@@ -243,6 +251,7 @@ function Events() {
                       </div>
                     </div>
                   </article>
+                  </Link>
                 </FadeIn>
               );
             })}
