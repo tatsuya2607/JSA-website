@@ -6,8 +6,6 @@ import {
   updateMember,
 } from "../api/teamMembers";
 
-const fieldClassName = "w-full p-3 border rounded bg-white text-gray-900 placeholder-gray-400 border-slate-300";
-
 const initialFormData = {
   name: "",
   role: "",
@@ -94,19 +92,19 @@ function AdminTeamManager() {
   }
 
   return (
-    <section className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+    <section className="mx-auto grid max-w-6xl gap-10 px-6 py-14 lg:grid-cols-[1fr_1.4fr]">
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 rounded-xl bg-white p-6 shadow-md"
+        className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
       >
-        <h2 className="text-2xl font-bold text-slate-800">Manage Members</h2>
+        <h1 className="text-2xl font-bold text-slate-800">Admin: Team Manager</h1>
 
         <input
           required
           value={formData.name}
           onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
           placeholder="Name"
-          className={fieldClassName}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
 
         <input
@@ -114,7 +112,7 @@ function AdminTeamManager() {
           value={formData.role}
           onChange={(event) => setFormData((prev) => ({ ...prev, role: event.target.value }))}
           placeholder="Role"
-          className={fieldClassName}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
 
         <input
@@ -123,7 +121,7 @@ function AdminTeamManager() {
           onChange={(event) => setFormData((prev) => ({ ...prev, message: event.target.value }))}
           placeholder="Message (1 line)"
           maxLength={120}
-          className={fieldClassName}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
 
         <input
@@ -131,7 +129,7 @@ function AdminTeamManager() {
           value={formData.imageUrl}
           onChange={(event) => setFormData((prev) => ({ ...prev, imageUrl: event.target.value }))}
           placeholder="Image URL"
-          className={fieldClassName}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
 
         <input
@@ -140,7 +138,7 @@ function AdminTeamManager() {
           value={formData.order}
           onChange={(event) => setFormData((prev) => ({ ...prev, order: Number(event.target.value) }))}
           placeholder="Order"
-          className={fieldClassName}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
 
         <div className="flex flex-wrap gap-3">
@@ -164,7 +162,7 @@ function AdminTeamManager() {
         </div>
       </form>
 
-      <div className="rounded-xl bg-white p-6 shadow-md">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-2xl font-bold text-slate-800">All Team Members</h2>
 
         {isLoading ? (
@@ -191,7 +189,7 @@ function AdminTeamManager() {
                       type="number"
                       defaultValue={Number(member.order ?? 0)}
                       onBlur={(event) => handleQuickOrderUpdate(member, event.target.value)}
-                      className="w-20 rounded border border-slate-300 bg-white px-2 py-1 text-sm text-gray-900"
+                      className="w-20 rounded-md border border-slate-300 px-2 py-1 text-sm"
                     />
                     <button
                       type="button"

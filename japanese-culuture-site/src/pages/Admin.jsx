@@ -8,7 +8,7 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { auth } from "../firebase/firebase";
-import AdminLayout from "../components/AdminLayout";
+import AdminNavbar from "../components/AdminNavbar";
 
 const dashboardCards = [
   {
@@ -27,10 +27,10 @@ const dashboardCards = [
   },
   {
     title: "Team Management",
-    description: "Add, update, and reorder leadership members.",
+    description: "メンバー情報の追加・編集・表示順の管理を行います。",
     icon: UsersIcon,
     href: "/admin/team",
-    actionLabel: "Open Team",
+    actionLabel: "チーム管理へ",
   },
 ];
 
@@ -60,8 +60,10 @@ function Admin() {
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-8">
+    <section className="min-h-screen bg-gray-100 text-slate-900">
+      <AdminNavbar />
+
+      <div className="mx-auto max-w-6xl space-y-8 p-6">
         <div className="rounded-xl bg-white p-8 shadow-md md:p-10">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">Dashboard</p>
           <h1 className="mt-2 text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
