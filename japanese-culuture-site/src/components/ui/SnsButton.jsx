@@ -1,4 +1,4 @@
-import { snsButtonData } from '../data/SnsButtonData';
+import { snsButtonData } from '../../data/SnsButtonData';
 
 const SnsButton = () => {
     return (

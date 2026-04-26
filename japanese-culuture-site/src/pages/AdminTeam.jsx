@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import AdminTeamManager from "../components/AdminTeamManager";
+import AdminTeamManager from "../components/admin/AdminTeamManager";
 
 function AdminTeam() {
   return (

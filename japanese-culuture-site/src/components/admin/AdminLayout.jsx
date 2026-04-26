@@ -1,4 +1,4 @@
-import AdminNavbar from "./AdminNavbar";
+import AdminNavbar from "../AdminNavbar";
 
 function AdminLayout({ children }) {
   return (

@@ -1,11 +1,8 @@
 import Home from './pages/Home'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import AdminNavbar from './components/AdminNavbar'
-import Culture from './pages/Culture'
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import AdminNavbar from './components/admin/AdminNavbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import CultureDetail from './pages/CultureDetail'
-import About from './pages/About'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import AdminEvents from './pages/AdminEvents'
@@ -25,15 +22,12 @@ function App() {
       <main className="min-h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/events" element={<AdminEvents />} />
           <Route path="/admin/team" element={<AdminTeam />} />
           <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/culture" element={<Culture />} />
-          <Route path="/culture/:id" element={<CultureDetail />} />
         </Routes>
       </main>
 

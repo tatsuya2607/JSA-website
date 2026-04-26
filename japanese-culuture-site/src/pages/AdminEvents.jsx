@@ -241,6 +241,13 @@ function AdminEvents() {
         <ul className="space-y-3">
           {events.map((event) => (
             <li key={event.id} className="rounded-lg border border-slate-100 p-4">
+              {event.imageUrl && (
+                <img
+                  src={event.imageUrl}
+                  alt={event.title}
+                  className="mb-3 h-40 w-full rounded-lg object-cover"
+                />
+              )}
               <p className="font-semibold text-slate-800">{event.title}</p>
               <p className="text-sm text-slate-600">{event.startAt || "TBD"}</p>
               <p className="text-sm text-slate-500">

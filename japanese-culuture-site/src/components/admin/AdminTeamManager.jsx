@@ -4,8 +4,8 @@ import {
   deleteMember,
   fetchMembers,
   updateMember,
-} from "../api/teamMembers";
-import { uploadImageFile } from "../api/uploads";
+} from "../../api/teamMembers";
+import { uploadImageFile } from "../../api/uploads";
 
 const initialFormData = {
   name: "",

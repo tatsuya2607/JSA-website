@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 
 const navItems = [
   { to: "/admin", label: "Dashboard" },
