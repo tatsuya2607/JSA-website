@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { createEvent, getEvents } from "../api/events";
+import { createEvent, deleteEvent, getEvents, updateEvent } from "../api/events";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { uploadImageFile } from "../api/uploads";
 import {
   EVENT_CATEGORIES,
   EVENT_STATUSES,
@@ -9,8 +10,13 @@ import {
 } from "../constants/eventSchema";
 
 const defaultFormData = {
-  primaryText: "",
-  secondaryText: "",
+  title: "",
+  category: EVENT_CATEGORIES[0],
+  startAt: "",
+  venueName: "",
+  imageUrl: "",
+  summary: "",
+  status: EVENT_STATUSES[0],
 };
 
 function AdminEvents() {
@@ -19,10 +25,10 @@ function AdminEvents() {
   const [isSaving, setIsSaving] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [editingItem, setEditingItem] = useState(null);
-  const [editingType, setEditingType] = useState(null);
+  const [editingEventId, setEditingEventId] = useState("");
 
   async function loadEvents() {
     const data = await getEvents({ includeDrafts: true });
@@ -54,36 +60,85 @@ function AdminEvents() {
     loadData();
   }, []);
 
-  function handleEdit(item, type) {
+  function handleEdit(item) {
     setSuccessMessage("");
     setErrorMessage("");
-    setEditingItem(item.id);
-    setEditingType(type);
+    setEditingEventId(item.id);
     setFormData({
-      primaryText: type === "event" ? item.title || "" : item.name || "",
-      secondaryText: type === "event" ? item.summary || "" : item.description || "",
+      title: item.title ?? "",
+      category: item.category ?? EVENT_CATEGORIES[0],
+      startAt: item.startAt ?? "",
+      venueName: item.venueName ?? "",
+      imageUrl: item.imageUrl ?? "",
+      summary: item.summary ?? "",
+      status: item.status ?? EVENT_STATUSES[0],
     });
   }
 
-  async function handleUpdate(event) {
+  function resetForm() {
+    setFormData(defaultFormData);
+    setEditingEventId("");
+  }
+
+  async function handleImageUpload(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingImage(true);
+    setErrorMessage("");
+
+    try {
+      const uploadedUrl = await uploadImageFile(file, "events");
+      setFormData((prev) => ({ ...prev, imageUrl: uploadedUrl }));
+    } catch (error) {
+      setErrorMessage(error.message || "Failed to upload image.");
+    } finally {
+      setIsUploadingImage(false);
+      event.target.value = "";
+    }
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
     setIsSaving(true);
     setErrorMessage("");
     setSuccessMessage("");
 
     try {
-      await createEvent(formData);
-      setSuccessMessage("Event created successfully!");
-      setFormData(defaultFormData);
+      if (editingEventId) {
+        await updateEvent(editingEventId, formData);
+        setSuccessMessage("Event updated successfully!");
+      } else {
+        await createEvent(formData);
+        setSuccessMessage("Event created successfully!");
+      }
+      resetForm();
       await loadEvents();
     } catch (error) {
-      setErrorMessage(error.message || "Failed to create event");
+      setErrorMessage(error.message || "Failed to save event");
     } finally {
       setIsSaving(false);
     }
   }
 
-  const handleSubmit = handleUpdate;
+  async function handleDelete(eventId) {
+    const shouldDelete = window.confirm("Delete this event?");
+    if (!shouldDelete) return;
+
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    try {
+      await deleteEvent(eventId);
+      if (editingEventId === eventId) {
+        resetForm();
+      }
+      setSuccessMessage("Event deleted successfully!");
+      await loadEvents();
+    } catch (error) {
+      setErrorMessage(error.message || "Failed to delete event");
+    }
+  }
 
   async function refreshData() {
     await loadEvents();
@@ -92,7 +147,9 @@ function AdminEvents() {
   return (
     <section className="mx-auto grid max-w-6xl gap-10 px-6 py-14 lg:grid-cols-[1fr_1.2fr]">
       <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-800">Admin: Create Event</h1>
+        <h1 className="text-2xl font-bold text-slate-800">
+          {editingEventId ? "Admin: Edit Event" : "Admin: Create Event"}
+        </h1>
 
         <input
           required
@@ -135,6 +192,13 @@ function AdminEvents() {
           placeholder="Image URL"
           className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+        {isUploadingImage && <p className="text-sm text-slate-500">Uploading image...</p>}
 
         <textarea
           required
@@ -161,12 +225,23 @@ function AdminEvents() {
           disabled={isSaving}
           className="w-full rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSaving ? "Saving..." : "Save Event"}
+          {isSaving ? "Saving..." : editingEventId ? "Update Event" : "Save Event"}
         </button>
+        {editingEventId && (
+          <button
+            type="button"
+            onClick={resetForm}
+            className="w-full rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Cancel Edit
+          </button>
+        )}
       </form>
 
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-2xl font-bold text-slate-800">All Events</h2>
+        {errorMessage && <p className="mb-3 text-sm text-rose-600">{errorMessage}</p>}
+        {successMessage && <p className="mb-3 text-sm text-emerald-600">{successMessage}</p>}
         <ul className="space-y-3">
           {events.map((event) => (
             <li key={event.id} className="rounded-lg border border-slate-100 p-4">
@@ -175,6 +250,22 @@ function AdminEvents() {
               <p className="text-sm text-slate-500">
                 {toCategoryLabel(event.category)} ・ {event.status}
               </p>
+              <div className="mt-3 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleEdit(event)}
+                  className="rounded-md bg-amber-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-amber-600"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(event.id)}
+                  className="rounded-md bg-rose-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-rose-700"
+                >
+                  Delete
+                </button>
+              </div>
             </li>
           ))}
         </ul>
