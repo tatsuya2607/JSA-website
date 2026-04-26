@@ -5,6 +5,7 @@ import {
   fetchMembers,
   updateMember,
 } from "../api/teamMembers";
+import { uploadImageFile } from "../api/uploads";
 
 const initialFormData = {
   name: "",
@@ -19,7 +20,9 @@ function AdminTeamManager() {
   const [formData, setFormData] = useState(initialFormData);
   const [editingId, setEditingId] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [uploadError, setUploadError] = useState("");
 
   const isEditing = useMemo(() => Boolean(editingId), [editingId]);
 
@@ -72,6 +75,25 @@ function AdminTeamManager() {
     await loadMembers();
     resetForm();
     setIsSaving(false);
+  }
+
+  async function handleImageUpload(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingImage(true);
+
+    setUploadError("");
+
+    try {
+      const uploadedUrl = await uploadImageFile(file, "teamMembers");
+      setFormData((prev) => ({ ...prev, imageUrl: uploadedUrl }));
+    } catch (error) {
+      setUploadError(error.message || "Failed to upload image.");
+    } finally {
+      setIsUploadingImage(false);
+      event.target.value = "";
+    }
   }
 
   async function handleDelete(memberId) {
@@ -131,6 +153,14 @@ function AdminTeamManager() {
           placeholder="Image URL"
           className="w-full rounded-lg border border-slate-300 px-3 py-2"
         />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+        {isUploadingImage && <p className="text-sm text-slate-500">Uploading image...</p>}
+        {uploadError && <p className="text-sm text-rose-600">{uploadError}</p>}
 
         <input
           required

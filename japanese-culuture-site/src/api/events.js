@@ -1,10 +1,12 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { normalizeEventPayload } from "../constants/eventSchema";
@@ -46,4 +48,17 @@ export async function createEvent(payload) {
   });
 
   return snapshot.id;
+}
+
+export async function updateEvent(id, payload) {
+  const normalizedPayload = normalizeEventPayload(payload);
+
+  await updateDoc(doc(db, "events", id), {
+    ...normalizedPayload,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+export async function deleteEvent(id) {
+  await deleteDoc(doc(db, "events", id));
 }
