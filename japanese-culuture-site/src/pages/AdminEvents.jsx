@@ -11,12 +11,12 @@ import {
 
 const defaultFormData = {
   title: "",
-  category: EVENT_CATEGORIES[0],
+  category: "",
   startAt: "",
   venueName: "",
   imageUrl: "",
   summary: "",
-  status: EVENT_STATUSES[0],
+  status: "",
 };
 
 function AdminEvents() {
@@ -156,7 +156,7 @@ function AdminEvents() {
           value={formData.title}
           onChange={(event) => setFormData((prev) => ({ ...prev, title: event.target.value }))}
           placeholder="Title"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         />
 
         <input
@@ -164,14 +164,15 @@ function AdminEvents() {
           type="datetime-local"
           value={formData.startAt}
           onChange={(event) => setFormData((prev) => ({ ...prev, startAt: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         />
 
         <select
           value={formData.category}
           onChange={(event) => setFormData((prev) => ({ ...prev, category: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         >
+          <option value="">Select a category</option>
           {EVENT_CATEGORIES.map((category) => (
             <option key={category} value={category}>
               {toCategoryLabel(category)}
@@ -183,15 +184,9 @@ function AdminEvents() {
           value={formData.venueName}
           onChange={(event) => setFormData((prev) => ({ ...prev, venueName: event.target.value }))}
           placeholder="Venue"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         />
 
-        <input
-          value={formData.imageUrl}
-          onChange={(event) => setFormData((prev) => ({ ...prev, imageUrl: event.target.value }))}
-          placeholder="Image URL"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
-        />
         <input
           type="file"
           accept="image/*"
@@ -205,14 +200,15 @@ function AdminEvents() {
           value={formData.summary}
           onChange={(event) => setFormData((prev) => ({ ...prev, summary: event.target.value }))}
           placeholder="Summary"
-          className="h-28 w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="h-28 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         />
 
         <select
           value={formData.status}
           onChange={(event) => setFormData((prev) => ({ ...prev, status: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
         >
+          <option value="">Select a status</option>
           {EVENT_STATUSES.map((status) => (
             <option key={status} value={status}>
               {status}

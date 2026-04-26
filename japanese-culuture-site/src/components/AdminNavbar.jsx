@@ -4,8 +4,8 @@ import { auth } from "../firebase/firebase";
 
 const navItems = [
   { to: "/admin", label: "Dashboard" },
-  { to: "/admin/team", label: "Team Management" },
   { to: "/admin/events", label: "Events Management" },
+  { to: "/admin/team", label: "Team Management" },
 ];
 
 function getNavClassName(isActive) {

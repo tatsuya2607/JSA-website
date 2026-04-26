@@ -147,13 +147,6 @@ function AdminTeamManager() {
         />
 
         <input
-          required
-          value={formData.imageUrl}
-          onChange={(event) => setFormData((prev) => ({ ...prev, imageUrl: event.target.value }))}
-          placeholder="Image URL"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
-        />
-        <input
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
