@@ -17,7 +17,7 @@ function EventsSection({ events }) {
 
       {events.length > 0 ? (
         <div className="mt-12 w-full max-w-6xl mx-auto">
-          <EventList events={events.slice(0, 3)} layout="home" />
+          <EventList events={events.slice(0, 3)} />
 
           {events.length > 3 && (
             <div className="mt-8 text-center">

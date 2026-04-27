@@ -12,10 +12,15 @@ import EventList from "../components/ui/EventList";
 import EmptyState from "../components/ui/EmptyState";
 import FilterDropdown from "../components/ui/FilterDropdown";
 import Hero from "../components/layout/Hero";
+import Section from "../components/layout/Section";
+import { tagColorMap } from "../constants/eventColors";
+
+import { mockEvents } from "../data/mockEvents";
 
 
 function Events() {
-  const events = useEvents();
+  // const events = useEvents();
+  const events = mockEvents;
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFromUrl = searchParams.get("category");
 
@@ -47,7 +52,9 @@ function Events() {
     }
   }, [activeCategory, setSearchParams]);
 
-
+  const categoryColor =
+    tagColorMap[activeCategory] ||
+    "bg-slate-200 text-slate-600";
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
@@ -70,22 +77,51 @@ function Events() {
           />
         </div>
 
-        {/* Events Grid */}
-        {filteredEvents.length > 0 ? (
-          <EventList events={filteredEvents} />
-        ) : (
-          <EmptyState
-            title="Coming Soon"
-            message="No events yet"
-            subMessage="Stay tuned!"
-            buttonText="Back to Home"
-            buttonLink="/"
-          />
+        {activeCategory !== "All" && (
+          <div className="mb-10 flex flex-col items-center gap-3">
+
+            <p className="text-sm text-slate-500">
+              Showing:
+              <span className={`ml-2 font-semibold ${categoryColor}`}>
+                {activeCategory}
+              </span>
+            </p>
+
+            <button
+              onClick={() => setActiveCategory("All")}
+              className={`
+                flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium
+                ${categoryColor}
+                hover:opacity-80 transition
+              `}
+              >
+              {activeCategory}
+              <span className="text-xs">✕</span>
+            </button>
+
+          </div>
         )}
+
+        {/* Events Grid */}
+        <div className="mx-auto max-w-6xl">
+          {filteredEvents.length > 0 ? (
+            <EventList events={filteredEvents} />
+          ) : (
+            <EmptyState
+              title="Coming Soon"
+              message="No events yet"
+              subMessage="Stay tuned!"
+              buttonText="Back to Home"
+              buttonLink="/"
+            />
+          )}
+        </div>
       </section>
 
       {/* Contact Section */}
-      <ContactSection />
+      <Section id="contact" bg="gray">
+        <ContactSection bg="gray" />
+      </Section>
     </div>
   );
 }

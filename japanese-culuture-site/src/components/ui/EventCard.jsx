@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, MapPinIcon } from "@heroicons/react/24/outline";
 
 function EventCard({ event, index, formatDate, categoryLabel, tagColorMap }) {
     return (
@@ -30,8 +30,7 @@ function EventCard({ event, index, formatDate, categoryLabel, tagColorMap }) {
                         </span>
                         <span
                             className={`rounded-full px-2.5 py-1 text-xs font-medium ${tagColorMap[categoryLabel] || tagColorMap.Other
-                                }`}
-                        >
+                                }`}>
                             {categoryLabel}
                         </span>
                     </div>
@@ -44,8 +43,9 @@ function EventCard({ event, index, formatDate, categoryLabel, tagColorMap }) {
                         {event.summary}
                     </p>
 
-                    <p className="mt-3 text-sm text-slate-500">
-                        {event.venueName || "Venue TBD"}
+                    <p className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+                        <MapPinIcon className="h-4 w-4 text-gray-500" />
+                        <span>{event.venueName || "Venue TBD"}</span>
                     </p>
 
                     <p className="mt-4 flex items-center text-sm font-semibold text-slate-400 transition-colors group-hover:text-indigo-600">
