@@ -5,15 +5,29 @@ import EventCard from "./EventCard";
 import FadeIn from "./FadeIn";
 
 // components/EventList.jsx
-function EventList({ events }) {
+function EventList({ events, layout = "grid" }) {
+    const isSingle = events.length === 1;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">            {
-            events.map((event, index) => {
+        <div
+            className={`
+                ${
+                    layout === "home" && isSingle
+                        ? "flex justify-center"
+                        : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                }
+                gap-8 px-4
+            `}
+        >
+            {events.map((event, index) => {
                 const categoryLabel = toCategoryLabel(event.category);
 
                 return (
-                    <FadeIn key={event.id} delay={index * 150} className="w-full max-w-sm">
+                    <FadeIn
+                        key={event.id}
+                        delay={index * 150}
+                        className="w-full max-w-sm"
+                    >
                         <EventCard
                             event={event}
                             formatDate={formatDate}
@@ -26,5 +40,4 @@ function EventList({ events }) {
         </div>
     );
 }
-
 export default EventList;

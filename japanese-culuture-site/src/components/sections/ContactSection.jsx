@@ -8,10 +8,24 @@ import SnsButton from "../ui/SnsButton";
 import FadeIn from "../ui/FadeIn";
 
 
-function ContactSection() {
+function ContactSection({ bg = "white" }) {
+    const cardBg =
+        bg === "gray"
+            ? "bg-white border border-slate-200"
+            : "bg-slate-50 border border-slate-200"
+        ;
+
+    const iconBg =
+        bg === "gray"
+            ? "bg-white text-slate-600 border border-slate-200"
+            : "bg-slate-100 text-slate-500"
+        ;
+
+
+
     return (
-        <section className="relative overflow-hidden bg-white px-6 py-24">
-            <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        <section className="relative overflow-hidden px-6 py-24">
+            <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent  to-transparent" />
 
             <div className="mx-auto max-w-4xl text-center">
                 <FadeIn direction="up">
@@ -25,7 +39,9 @@ function ContactSection() {
                     <FadeIn delay={200} direction="up">
                         <a
                             href="mailto:jsa@university.edu"
-                            className="group flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all duration-300 hover:border-indigo-100 hover:bg-white hover:shadow-xl"
+                            className={`group flex flex-col items-center justify-center rounded-2xl ${cardBg} p-8
+                                shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1
+                            `}
                         >
                             <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100 text-pink-500 transition-all duration-300 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white">
                                 <EnvelopeIcon className="h-6 w-6" />
@@ -35,8 +51,19 @@ function ContactSection() {
                         </a>
                     </FadeIn>
 
+                    {/* <div 
+                                className={`group flex flex-col items-center justify-center rounded-2xl ${cardBg} p-8
+                                    shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1
+                                `}>
+                                <UserGroupIcon className="h-6 w-6" />
+                            </div> */}
+
                     <FadeIn delay={400} direction="up">
-                        <div className="group flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-8 transition-all duration-300 hover:border-indigo-100 hover:bg-white hover:shadow-xl">
+                        <div
+                            className={`group flex flex-col items-center justify-center rounded-2xl
+                                ${cardBg} p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1
+                            `}
+                        >
                             <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100 text-pink-500 transition-all duration-300 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white">
                                 <UserGroupIcon className="h-6 w-6" />
                             </div>
@@ -48,6 +75,7 @@ function ContactSection() {
                     </FadeIn>
                 </div>
 
+                {/* Social Media Links */}
                 <FadeIn delay={600} direction="up">
                     <div className="flex justify-center gap-4">
                         {[
@@ -60,7 +88,12 @@ function ContactSection() {
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-all duration-300 hover:-translate-y-1 hover:bg-indigo-500 hover:text-white"
+
+                                className={`
+                                    flex h-12 w-12 items-center justify-center rounded-full
+                                    ${iconBg} transition-all duration-300 hover:-translate-y-1
+                                    hover:bg-indigo-500 hover:text-white
+                                `}
                             >
                                 {icon({ className: "h-5 w-5" })}
                             </a>

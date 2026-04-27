@@ -15,5 +15,7 @@ export async function uploadImageFile(file, folder = "uploads") {
   const storageRef = ref(storage, `${folder}/${timestamp}-${normalizedName}`);
 
   await uploadBytes(storageRef, file);
-  return getDownloadURL(storageRef);
+  const url = await getDownloadURL(storageRef);
+
+  return url;
 }

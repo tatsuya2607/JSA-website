@@ -1,5 +1,5 @@
 import Section from "../layout/Section";
-import CultureSection from "./CultureSection";
+import CultureSection from "../ui/CultureSection";
 import { cultureData } from "../../data/CultureData";
 
 function CultureSectionWrapper() {

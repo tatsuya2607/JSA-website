@@ -17,7 +17,7 @@ function EventsSection({ events }) {
 
       {events.length > 0 ? (
         <div className="mt-12 w-full max-w-6xl mx-auto">
-          <EventList events={events.slice(0, 3)} />
+          <EventList events={events.slice(0, 3)} layout="home" />
 
           {events.length > 3 && (
             <div className="mt-8 text-center">
@@ -35,8 +35,8 @@ function EventsSection({ events }) {
           title="Coming Soon"
           message="No events yet"
           subMessage="Stay tuned! New events will be announced soon."
-          buttonText="Contact Us"
-          buttonLink="/contact"
+          buttonText=""
+          buttonLink=""
         />
       )}
     </Section>
