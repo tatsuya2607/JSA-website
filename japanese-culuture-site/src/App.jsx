@@ -9,6 +9,7 @@ import AdminEvents from './pages/AdminEvents'
 import Admin from './pages/Admin'
 import AdminLogin from './pages/AdminLogin'
 import AdminTeam from './pages/AdminTeam'
+import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
   const { pathname } = useLocation();
@@ -24,9 +25,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/events" element={<AdminEvents />} />
-          <Route path="/admin/team" element={<AdminTeam />} />
+          <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route path="/admin/events" element={<ProtectedRoute><AdminEvents /></ProtectedRoute>} />
+          <Route path="/admin/team" element={<ProtectedRoute><AdminTeam /></ProtectedRoute>} />
           <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </main>
