@@ -8,6 +8,10 @@ import {
   EVENT_STATUSES,
   toCategoryLabel,
 } from "../constants/eventSchema";
+import EventForm from "../components/admin/EventForm";
+import EventListAdmin from "../components/admin/AdminEventList";
+import Modal from "../components/ui/Modal";
+
 
 const defaultFormData = {
   title: "",
@@ -29,6 +33,8 @@ function AdminEvents() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [editingEventId, setEditingEventId] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   async function loadEvents() {
     const data = await getEvents({ includeDrafts: true });
@@ -60,20 +66,6 @@ function AdminEvents() {
     loadData();
   }, []);
 
-  function handleEdit(item) {
-    setSuccessMessage("");
-    setErrorMessage("");
-    setEditingEventId(item.id);
-    setFormData({
-      title: item.title ?? "",
-      category: item.category ?? EVENT_CATEGORIES[0],
-      startAt: item.startAt ?? "",
-      venueName: item.venueName ?? "",
-      imageUrl: item.imageUrl ?? "",
-      summary: item.summary ?? "",
-      status: item.status ?? EVENT_STATUSES[0],
-    });
-  }
 
   function resetForm() {
     setFormData(defaultFormData);
@@ -98,31 +90,12 @@ function AdminEvents() {
     }
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setIsSaving(true);
-    setErrorMessage("");
-    setSuccessMessage("");
-
-    try {
-      if (editingEventId) {
-        await updateEvent(editingEventId, formData);
-        setSuccessMessage("Event updated successfully!");
-      } else {
-        await createEvent(formData);
-        setSuccessMessage("Event created successfully!");
-      }
-      resetForm();
-      await loadEvents();
-    } catch (error) {
-      setErrorMessage(error.message || "Failed to save event");
-    } finally {
-      setIsSaving(false);
-    }
+  async function refreshData() {
+    await loadEvents();
   }
 
   async function handleDelete(eventId) {
-    const shouldDelete = window.confirm("Delete this event?");
+    const shouldDelete = window.confirm("Are you sure to delete this event?");
     if (!shouldDelete) return;
 
     setErrorMessage("");
@@ -140,140 +113,121 @@ function AdminEvents() {
     }
   }
 
-  async function refreshData() {
-    await loadEvents();
+  function validateForm(formData) {
+    const title = formData.title.trim();
+    const venue = formData.venueName.trim();
+    const summary = formData.summary.trim();
+
+    if (title.length < 3) return "Title must be at least 3 characters";
+    if (title.length > 50) return "Title must be under 50 characters";
+
+    if (venue && venue.length < 2) return "Venue must be at least 2 characters";
+    if (venue.length > 50) return "Venue must be under 50 characters";
+
+    if (summary.length < 10) return "Summary must be at least 10 characters";
+    if (summary.length > 200) return "Summary must be under 200 characters";
+
+    return null;
+  }
+
+  function handleEdit(item) {
+    setEditingEventId(item.id);
+    setFormData({
+      title: item.title ?? "",
+      category: item.category ?? EVENT_CATEGORIES[0],
+      startAt: item.startAt ?? "",
+      venueName: item.venueName ?? "",
+      imageUrl: item.imageUrl ?? "",
+      summary: item.summary ?? "",
+      status: item.status ?? EVENT_STATUSES[0],
+    });
+
+    setIsModalOpen(true);
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setIsSaving(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    const error = validateForm(formData);
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+
+    try {
+      if (editingEventId) {
+        await updateEvent(editingEventId, formData);
+        setSuccessMessage("Event updated successfully!");
+      } else {
+        await createEvent(formData);
+        setSuccessMessage("Event created successfully!");
+      }
+
+      resetForm();
+      setIsModalOpen(false);
+      await loadEvents();
+
+    } catch (error) {
+      setErrorMessage(error.message || "Failed to save event");
+    } finally {
+      setIsSaving(false);
+    }
   }
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-10 px-6 py-14 lg:grid-cols-[1fr_1.2fr]">
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-slate-800">
-          {editingEventId ? "Admin: Edit Event" : "Admin: Create Event"}
-        </h1>
+    <div className=" px-6 py-10">
+      <div className="mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">
+              Events Management
+            </h1>
+            <p className="mt-1 text-sm text-slate-500">
+              Create, edit, and manage JSA events.
+            </p>
+          </div>
 
-        <input
-          required
-          value={formData.title}
-          onChange={(event) => setFormData((prev) => ({ ...prev, title: event.target.value }))}
-          placeholder="Title"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        />
-
-        <input
-          required
-          type="datetime-local"
-          value={formData.startAt}
-          onChange={(event) => setFormData((prev) => ({ ...prev, startAt: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        />
-
-        <select
-          value={formData.category}
-          onChange={(event) => setFormData((prev) => ({ ...prev, category: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        >
-          <option value="">Select a category</option>
-          {EVENT_CATEGORIES.map((category) => (
-            <option key={category} value={category}>
-              {toCategoryLabel(category)}
-            </option>
-          ))}
-        </select>
-
-        <input
-          value={formData.venueName}
-          onChange={(event) => setFormData((prev) => ({ ...prev, venueName: event.target.value }))}
-          placeholder="Venue"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        />
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
-        />
-        {isUploadingImage && <p className="text-sm text-slate-500">Uploading image...</p>}
-
-        <textarea
-          required
-          value={formData.summary}
-          onChange={(event) => setFormData((prev) => ({ ...prev, summary: event.target.value }))}
-          placeholder="Summary"
-          className="h-28 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        />
-
-        <select
-          value={formData.status}
-          onChange={(event) => setFormData((prev) => ({ ...prev, status: event.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900"
-        >
-          <option value="">Select a status</option>
-          {EVENT_STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
-
-        <button
-          type="submit"
-          disabled={isSaving}
-          className="w-full rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {isSaving ? "Saving..." : editingEventId ? "Update Event" : "Save Event"}
-        </button>
-        {editingEventId && (
           <button
-            type="button"
-            onClick={resetForm}
-            className="w-full rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:bg-slate-100"
+            onClick={() => {
+              resetForm();
+              setIsModalOpen(true);
+            }}
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
           >
-            Cancel Edit
+            + Create Event
           </button>
-        )}
-      </form>
+        </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-2xl font-bold text-slate-800">All Events</h2>
-        {errorMessage && <p className="mb-3 text-sm text-rose-600">{errorMessage}</p>}
-        {successMessage && <p className="mb-3 text-sm text-emerald-600">{successMessage}</p>}
-        <ul className="space-y-3">
-          {events.map((event) => (
-            <li key={event.id} className="rounded-lg border border-slate-100 p-4">
-              {event.imageUrl && (
-                <img
-                  src={event.imageUrl}
-                  alt={event.title}
-                  className="mb-3 h-40 w-full rounded-lg object-cover"
-                />
-              )}
-              <p className="font-semibold text-slate-800">{event.title}</p>
-              <p className="text-sm text-slate-600">{event.startAt || "TBD"}</p>
-              <p className="text-sm text-slate-500">
-                {toCategoryLabel(event.category)} ・ {event.status}
-              </p>
-              <div className="mt-3 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleEdit(event)}
-                  className="rounded-md bg-amber-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-amber-600"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(event.id)}
-                  className="rounded-md bg-rose-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-rose-700"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {/* Event List */}
+        <EventListAdmin
+          events={events}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          errorMessage={errorMessage}
+          successMessage={successMessage}
+        />
       </div>
-    </section>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <EventForm
+          formData={formData}
+          setFormData={setFormData}
+          handleSubmit={handleSubmit}
+          handleImageUpload={handleImageUpload}
+          isSaving={isSaving}
+          isUploadingImage={isUploadingImage}
+          editingEventId={editingEventId}
+          resetForm={() => {
+            resetForm();
+            setIsModalOpen(false);
+          }}
+        />
+      </Modal>
+    </div>
   );
 }
 

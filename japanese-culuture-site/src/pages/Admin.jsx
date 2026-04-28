@@ -1,37 +1,10 @@
 import { useEffect, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-    CalendarDaysIcon,
-    DocumentTextIcon,
-    UsersIcon,
-    ArrowRightIcon,
-} from "@heroicons/react/24/outline";
 import { auth } from "../firebase/firebase";
 
-const dashboardCards = [
-    {
-        title: "Events Management",
-        description: "Create events and review their publish status.",
-        icon: CalendarDaysIcon,
-        href: "/admin/events",
-        actionLabel: "Open Events",
-    },
-    {
-        title: "Team Management",
-        description: "Manage team members, roles, and permissions for the admin dashboard.",
-        icon: UsersIcon,
-        href: "/admin/team",
-        actionLabel: "Open Team",
-    },
-    {
-        title: "Site Review",
-        description: "Review the public website and latest content updates.",
-        icon: DocumentTextIcon,
-        href: "/",
-        actionLabel: "Open Website",
-    },
-];
+import AdminDashboardCard from "../components/admin/AdminDashboardCard";
+import { dashboardCards } from "../data/AdminDashboardData";
 
 function Admin() {
     const [user, setUser] = useState(undefined);
@@ -71,29 +44,9 @@ function Admin() {
 
                 {/* Dashboard Cards */}
                 <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                    {dashboardCards.map((card) => {
-                        const Icon = card.icon;
-
-                        return (
-                            <article
-                                key={card.title}
-                                className="group flex h-full flex-col rounded-xl bg-white p-6 shadow-md transition hover:-translate-y-1"
-                            >
-                                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
-                                    <Icon className="h-6 w-6" />
-                                </div>
-                                <h2 className="text-lg font-semibold text-slate-800">{card.title}</h2>
-                                <p className="mt-2 flex-grow text-sm leading-relaxed text-gray-500">{card.description}</p>
-                                <Link
-                                    to={card.href}
-                                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 transition group-hover:text-indigo-700"
-                                >
-                                    {card.actionLabel}
-                                    <ArrowRightIcon className="h-4 w-4" />
-                                </Link>
-                            </article>
-                        );
-                    })}
+                    {dashboardCards.map((card) => (
+                        <AdminDashboardCard key={card.title} {...card} />
+                    ))}
                 </div>
             </div>
         </section>

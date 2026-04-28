@@ -15,12 +15,10 @@ import Hero from "../components/layout/Hero";
 import Section from "../components/layout/Section";
 import { tagColorMap } from "../constants/eventColors";
 
-import { mockEvents } from "../data/mockEvents";
 
 
 function Events() {
-  // const events = useEvents();
-  const events = mockEvents;
+  const events = useEvents();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFromUrl = searchParams.get("category");
 
