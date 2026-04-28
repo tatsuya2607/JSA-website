@@ -1,6 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 const navigation = [
   { name: 'Home', to: '/', end: true },
@@ -16,6 +16,10 @@ function getLinkClass(isActive) {
 }
 
 export default function Navbar() {
+  const { pathname } = useLocation()
+
+  const contactTo = pathname.startsWith('/events') ? '/events#contact' : '/#contact'
+
   return (
     <Disclosure
       as="nav"
@@ -57,7 +61,7 @@ export default function Navbar() {
 
           <div className="hidden sm:block">
             <Link
-              to="/#contact"
+              to={contactTo}
               className="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
             >
               Contact Us
@@ -84,7 +88,7 @@ export default function Navbar() {
           ))}
           <DisclosureButton
             as={Link}
-            to="/#contact"
+            to={contactTo}
             className="mt-3 block rounded-full bg-emerald-600 px-3 py-2 text-base font-semibold text-white transition-colors hover:bg-emerald-700"
           >
             Contact Us

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import ContactSection from "../components/sections/ContactSection";
 
 import { EVENT_CATEGORIES, toCategoryLabel } from "../constants/eventSchema";
@@ -18,6 +18,7 @@ import { tagColorMap } from "../constants/eventColors";
 
 function Events() {
   const events = useEvents();
+  const { hash } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFromUrl = searchParams.get("category");
 
@@ -47,6 +48,18 @@ function Events() {
       setSearchParams({ category: categoryValue });
     }
   }, [activeCategory, setSearchParams]);
+
+  useEffect(() => {
+    if (!hash) return;
+
+    const sectionId = hash.replace("#", "");
+    const target = document.getElementById(sectionId);
+
+    if (!target) return;
+
+    const y = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, [hash]);
 
   const categoryColor =
     tagColorMap[activeCategory] ||

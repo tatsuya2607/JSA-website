@@ -12,6 +12,7 @@ import Section from "../components/layout/Section";
 import AboutSection from "../components/sections/AboutSection";
 import CultureSectonWrapper from "../components/sections/CultureSectionWrapper";
 import EventsSection from "../components/sections/EventsSection";
+import FadeIn from "../components/ui/FadeIn";
 
 
 function Home() {
@@ -44,27 +45,37 @@ function Home() {
 
       {/* About */}
       <Section id="about" bg="gray">
-        <AboutSection />
+        <FadeIn direction="up">
+          <AboutSection />
+        </FadeIn>
       </Section>
 
       {/* Japanese Culture */}
       <Section id="culture" bg="white">
-        <CultureSectonWrapper />
+        <FadeIn delay={100} direction="up">
+          <CultureSectonWrapper />
+        </FadeIn>
       </Section>
 
       {/* Upcoming Events */}
       <Section id="events" bg="gray">
-        <EventsSection events={filteredEvents} />
+        <FadeIn delay={200} direction="up">
+          <EventsSection events={filteredEvents} />
+        </FadeIn>
       </Section>
 
       {/* Meet the Team */}
       <Section id="team" bg="white">
-        <TeamSection />
+        <FadeIn delay={300} direction="up">
+          <TeamSection />
+        </FadeIn>
       </Section>
 
       {/* Get In Touch */}
       <Section id="contact" bg="gray">
-        <ContactSection bg="gray" />
+        <FadeIn delay={400} direction="up">
+          <ContactSection bg="gray" />
+        </FadeIn>
       </Section>
     </>
   );
