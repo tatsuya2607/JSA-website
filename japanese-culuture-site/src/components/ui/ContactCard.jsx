@@ -1,4 +1,5 @@
-function ContactCard({ icon: Icon, title, description, href }) {
+function ContactCard({ icon, title, description, href }) {
+      const Icon = icon;
       const Container = href ? "a" : "div";
       const containerProps = href
         ? {

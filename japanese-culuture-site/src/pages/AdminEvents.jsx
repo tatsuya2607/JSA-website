@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createEvent, deleteEvent, getEvents, updateEvent } from "../api/events";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/firebase";
 import { uploadImageFile } from "../api/uploads";
 import {
   EVENT_CATEGORIES,
   EVENT_STATUSES,
-  toCategoryLabel,
 } from "../constants/eventSchema";
 import EventForm from "../components/admin/EventForm";
 import EventListAdmin from "../components/admin/AdminEventList";
@@ -27,8 +24,6 @@ function AdminEvents() {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState(defaultFormData);
   const [isSaving, setIsSaving] = useState(false);
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -41,31 +36,23 @@ function AdminEvents() {
     setEvents(data);
   }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe();
+  const refreshData = useCallback(async () => {
+    await loadEvents();
   }, []);
 
   useEffect(() => {
     async function loadData() {
-      setIsLoading(true);
       setErrorMessage("");
 
       try {
         await refreshData();
       } catch (error) {
-        setErrorMessage(error.message || "Failed to load events and teams.");
-      } finally {
-        setIsLoading(false);
+        setErrorMessage(error.message || "Failed to load events.");
       }
     }
 
     loadData();
-  }, []);
-
+  }, [refreshData]);
 
   function resetForm() {
     setFormData(defaultFormData);
@@ -88,10 +75,6 @@ function AdminEvents() {
       setIsUploadingImage(false);
       event.target.value = "";
     }
-  }
-
-  async function refreshData() {
-    await loadEvents();
   }
 
   async function handleDelete(eventId) {

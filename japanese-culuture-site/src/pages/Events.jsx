@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import ContactSection from "../components/sections/ContactSection";
 
 import { EVENT_CATEGORIES, toCategoryLabel } from "../constants/eventSchema";
@@ -27,7 +26,6 @@ function Events() {
     : "All";
 
   const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Compute unique categories from events data
   const categories = getCategories();

@@ -1,6 +1,5 @@
-import React from 'react';
-
-function AboutCard({ icon: Icon, title, description }) {
+function AboutCard({ icon, title, description }) {
+    const Icon = icon;
     return (
         <div className="block max-w-md p-6 bg-white border border-gray-200 rounded-lg 
             shadow-sm mt-7">
@@ -20,6 +19,4 @@ function AboutCard({ icon: Icon, title, description }) {
 }
 
 export default AboutCard;
-
-
 
