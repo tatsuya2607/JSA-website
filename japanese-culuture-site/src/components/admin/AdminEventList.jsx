@@ -1,5 +1,3 @@
-import { toCategoryLabel } from "../../constants/eventSchema";
-import Admin from "../../pages/Admin";
 import EventItemCard from "./EventItemCard";
 
 function AdminEventList({
@@ -25,16 +23,14 @@ function AdminEventList({
             )}
 
             <ul className="space-y-3">
-                <ul className="space-y-3">
-                    {events.map((event) => (
-                        <EventItemCard
-                            key={event.id}
-                            event={event}
-                            handleEdit={handleEdit}
-                            handleDelete={handleDelete}
-                        />
-                    ))}
-                </ul>
+                {events.map((event) => (
+                    <EventItemCard
+                        key={event.id}
+                        event={event}
+                        handleEdit={handleEdit}
+                        handleDelete={handleDelete}
+                    />
+                ))}
             </ul>
         </div>
     );

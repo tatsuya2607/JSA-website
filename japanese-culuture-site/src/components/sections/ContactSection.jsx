@@ -2,9 +2,6 @@
 
 import { EnvelopeIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { contactData } from "../../data/ContactData";
-import ContactCard from "../ui/ContactCard";
-import SnsButton from "../ui/SnsButton";
 import FadeIn from "../ui/FadeIn";
 
 

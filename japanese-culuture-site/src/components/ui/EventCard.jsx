@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRightIcon, MapPinIcon } from "@heroicons/react/24/outline";
 
-function EventCard({ event, index, formatDate, categoryLabel, tagColorMap }) {
+function EventCard({ event, formatDate, categoryLabel, tagColorMap }) {
     return (
         <Link to={`/events/${event.id}`} className="group block h-full">
             <article className="flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">

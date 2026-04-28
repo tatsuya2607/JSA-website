@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-function AdminDashboardCard({ title, icon: Icon, description, href, actionLabel }) {
+function AdminDashboardCard({ title, icon, description, href, actionLabel }) {
+    const Icon = icon;
     return (
         <article
             className="group flex h-full flex-col rounded-xl bg-white p-6 shadow-md transition hover:-translate-y-1"
