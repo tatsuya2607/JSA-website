@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 
 function AdminLogin() {
@@ -9,6 +9,8 @@ function AdminLogin() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.state?.from || "/admin";
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -17,7 +19,7 @@ function AdminLogin() {
 
     try {
       await signInWithEmailAndPassword(auth, email.trim(), password);
-      navigate("/admin");
+      navigate(redirectPath, { replace: true });
     } catch (error) {
       console.error("Admin login failed:", error);
       setErrorMessage("Login failed. Please check your email and password.");
