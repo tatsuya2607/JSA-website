@@ -1,4 +1,3 @@
-// constants/eventColors.js
 export const tagColorMap = {
   Culture: "bg-green-100 text-green-600",
   Food: "bg-yellow-100 text-yellow-600",

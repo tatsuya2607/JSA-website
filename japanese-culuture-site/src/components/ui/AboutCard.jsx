@@ -11,7 +11,7 @@ function AboutCard({ icon, title, description }) {
             <h5 className="mb-2 text-md tracking-tight text-black text-center">
                 {title}
             </h5>
-            <p className="font-normal text-black p-3 text-gray-500 text-center">
+            <p className="font-normal p-3 text-gray-500 text-center">
                 {description}
             </p>
         </div>

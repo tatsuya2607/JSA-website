@@ -1,4 +1,3 @@
-// components/FadeIn.jsx
 import useInView from "../../hooks/useInView";
 
 function FadeIn({ children, delay = 0, direction = "up", className = "" }) {

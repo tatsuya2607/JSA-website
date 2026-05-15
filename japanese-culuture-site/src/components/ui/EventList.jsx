@@ -4,7 +4,6 @@ import { formatDate } from "../../utils/formatDate";
 import EventCard from "./EventCard";
 import FadeIn from "./FadeIn";
 
-// components/EventList.jsx
 function EventList({ events }) {
     const isSingle = events.length === 1;
     const isDouble = events.length === 2;
