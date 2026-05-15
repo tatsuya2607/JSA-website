@@ -137,6 +137,7 @@ function AdminEvents() {
     const error = validateForm(formData);
     if (error) {
       setErrorMessage(error);
+      setIsSaving(false);
       return;
     }
 
