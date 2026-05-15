@@ -67,23 +67,23 @@ function ContactSection({ bg = "white" }) {
                 <FadeIn delay={600} direction="up">
                     <div className="flex justify-center gap-4">
                         {[
-                            { icon: FaFacebookF, href: "https://www.facebook.com" },
-                            { icon: FaXTwitter, href: "https://x.com" },
-                            { icon: FaInstagram, href: "https://www.instagram.com" },
-                        ].map(({ icon, href }) => (
+                            { icon: FaFacebookF, href: "https://www.facebook.com", label: "Facebook" },
+                            { icon: FaXTwitter, href: "https://x.com", label: "X (Twitter)" },
+                            { icon: FaInstagram, href: "https://www.instagram.com", label: "Instagram" },
+                        ].map(({ icon: Icon, href, label }) => (
                             <a
                                 key={href}
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-
+                                aria-label={label}
                                 className={`
                                     flex h-12 w-12 items-center justify-center rounded-full
                                     ${iconBg} transition-all duration-300 hover:-translate-y-1
                                     hover:bg-indigo-500 hover:text-white
                                 `}
                             >
-                                {icon({ className: "h-5 w-5" })}
+                                <Icon className="h-5 w-5" />
                             </a>
                         ))}
                     </div>

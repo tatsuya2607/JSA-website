@@ -2,20 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getEventById } from "../api/events";
 import { toCategoryLabel } from "../constants/eventSchema";
-
-function formatDate(startAt) {
-  if (!startAt) return "TBD";
-  const date = new Date(startAt);
-  if (Number.isNaN(date.getTime())) return "TBD";
-
-  return date.toLocaleString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
+import { formatDate } from "../utils/formatDate";
 
 function EventDetail() {
   const { id } = useParams();
@@ -69,7 +56,7 @@ function EventDetail() {
         )}
 
         <div className="p-8">
-          <p className="mb-3 text-sm font-semibold text-indigo-600">{formatDate(event.startAt)}</p>
+          <p className="mb-3 text-sm font-semibold text-indigo-600">{formatDate(event.startAt, { withTime: true })}</p>
           <h1 className="mb-3 text-3xl font-bold text-slate-800">{event.title}</h1>
           <p className="mb-6 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
             {toCategoryLabel(event.category)}

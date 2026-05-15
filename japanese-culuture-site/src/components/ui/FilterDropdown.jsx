@@ -4,7 +4,9 @@ import FadeIn from "./FadeIn";
 
 function FilterDropdown({ categories, activeCategory, setActiveCategory }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef(null);
+  const itemRefs = useRef([]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -17,12 +19,42 @@ function FilterDropdown({ categories, activeCategory, setActiveCategory }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setActiveIndex(-1);
+      return;
+    }
+    function handleKeyDown(event) {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setActiveIndex((prev) => (prev + 1) % categories.length);
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setActiveIndex((prev) =>
+          prev <= 0 ? categories.length - 1 : prev - 1
+        );
+      } else if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, categories.length]);
+
+  useEffect(() => {
+    if (isOpen && activeIndex >= 0) {
+      itemRefs.current[activeIndex]?.focus();
+    }
+  }, [activeIndex, isOpen]);
+
   return (
     <div className="relative" ref={containerRef}>
       <FadeIn delay={500}>
       <button
         type="button"
         onClick={() => setIsOpen((open) => !open)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className="group flex items-center gap-2 font-medium text-slate-600 hover:text-slate-900"
       >
         Filter by Category
@@ -35,10 +67,17 @@ function FilterDropdown({ categories, activeCategory, setActiveCategory }) {
       </FadeIn>
 
       {isOpen && (
-        <div className="absolute right-0 z-20 mt-2 w-48 rounded-xl border bg-white shadow-xl">
-          {categories.map((category) => (
+        <div
+          role="listbox"
+          className="absolute right-0 z-20 mt-2 w-48 rounded-xl border bg-white shadow-xl"
+        >
+          {categories.map((category, index) => (
             <button
               key={category}
+              type="button"
+              role="option"
+              aria-selected={activeCategory === category}
+              ref={(el) => (itemRefs.current[index] = el)}
               onClick={() => {
                 setActiveCategory(category);
                 setIsOpen(false);
