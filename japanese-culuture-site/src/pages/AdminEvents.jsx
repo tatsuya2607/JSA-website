@@ -162,7 +162,7 @@ function AdminEvents() {
   }
 
   return (
-    <div className=" px-6 py-10">
+    <div className="px-6 py-10">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">

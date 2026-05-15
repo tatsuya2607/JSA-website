@@ -28,7 +28,6 @@ function Events() {
 
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
-  // Compute unique categories from events data
   const categories = getCategories();
 
   const filteredEvents = useFilteredEvents(events, activeCategory);

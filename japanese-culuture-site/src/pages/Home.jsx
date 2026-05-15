@@ -35,7 +35,6 @@ function Home() {
 
 
   return (
-    // Hero 
     <>
       <Hero
         title="Discover Japan"
