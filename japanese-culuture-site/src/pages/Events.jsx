@@ -17,7 +17,7 @@ import { tagColorMap } from "../constants/eventColors";
 
 
 function Events() {
-  const events = useEvents();
+  const { events, loading } = useEvents();
   const { hash } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFromUrl = searchParams.get("category");
@@ -113,7 +113,9 @@ function Events() {
 
         {/* Events Grid */}
         <div className="mx-auto max-w-6xl">
-          {filteredEvents.length > 0 ? (
+          {loading ? (
+            <p className="text-center text-gray-500">Loading...</p>
+          ) : filteredEvents.length > 0 ? (
             <EventList events={filteredEvents} />
           ) : (
             <EmptyState

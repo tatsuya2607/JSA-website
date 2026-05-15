@@ -29,7 +29,7 @@ function TeamSection() {
           )}
           {teamMembers.map((member) => (
             <article
-              key={member.name}
+              key={member.id}
               className="w-full max-w-xs rounded-xl bg-white p-6 text-center shadow-md"
             >
               <img

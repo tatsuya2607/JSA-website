@@ -1,7 +1,6 @@
-// hooks/useInView.js
 import { useEffect, useRef, useState } from "react";
 
-export default function useInView(options = { threshold: 0.1 }) {
+export default function useInView({ threshold = 0.1 } = {}) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -11,11 +10,11 @@ export default function useInView(options = { threshold: 0.1 }) {
         setIsInView(true);
         if (ref.current) observer.unobserve(ref.current);
       }
-    }, options);
+    }, { threshold });
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [options]);
+  }, [threshold]);
 
   return [ref, isInView];
 }

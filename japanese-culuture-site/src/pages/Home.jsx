@@ -16,7 +16,7 @@ import FadeIn from "../components/ui/FadeIn";
 
 
 function Home() {
-  const events = useEvents();
+  const { events } = useEvents();
   const { hash } = useLocation();
 
   const filteredEvents = useFilteredEvents(events, "All");
