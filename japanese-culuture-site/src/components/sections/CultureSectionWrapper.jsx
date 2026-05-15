@@ -21,8 +21,12 @@ function CultureSectionWrapper() {
       {cultureData.map((data, index) => (
         <CultureSection
           key={data.id}
-          {...data}
-          isReversed={index % 2 === 0}
+          tag={data.tag}
+          title={data.title}
+          description={data.description}
+          items={data.items}
+          image={data.image}
+          isReversed={index % 2 !== 0}
         />
       ))}
     </Section>

@@ -4,11 +4,13 @@ import { fetchMembers } from "../../api/teamMembers";
 function TeamSection() {
 
   const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchMembers();
       setTeamMembers(data);
+      setLoading(false);
     }
 
     fetchData();
@@ -22,6 +24,9 @@ function TeamSection() {
 
         {/* Team Member Cards */}
         <div className="mt-10 flex flex-wrap justify-center gap-6">
+          {loading && (
+            <p className="text-gray-500">Loading...</p>
+          )}
           {teamMembers.map((member) => (
             <article
               key={member.name}

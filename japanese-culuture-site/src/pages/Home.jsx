@@ -10,7 +10,7 @@ import useFilteredEvents from "../hooks/useFilteredEvents";
 import Hero from "../components/layout/Hero";
 import Section from "../components/layout/Section";
 import AboutSection from "../components/sections/AboutSection";
-import CultureSectonWrapper from "../components/sections/CultureSectionWrapper";
+import CultureSectionWrapper from "../components/sections/CultureSectionWrapper";
 import EventsSection from "../components/sections/EventsSection";
 import FadeIn from "../components/ui/FadeIn";
 
@@ -44,25 +44,19 @@ function Home() {
       />
 
       {/* About */}
-      <Section id="about" bg="gray">
-        <FadeIn direction="up">
-          <AboutSection />
-        </FadeIn>
-      </Section>
+      <FadeIn direction="up">
+        <AboutSection />
+      </FadeIn>
 
       {/* Japanese Culture */}
-      <Section id="culture" bg="white">
-        <FadeIn delay={100} direction="up">
-          <CultureSectonWrapper />
-        </FadeIn>
-      </Section>
+      <FadeIn delay={100} direction="up">
+        <CultureSectionWrapper />
+      </FadeIn>
 
       {/* Upcoming Events */}
-      <Section id="events" bg="gray">
-        <FadeIn delay={200} direction="up">
-          <EventsSection events={filteredEvents} />
-        </FadeIn>
-      </Section>
+      <FadeIn delay={200} direction="up">
+        <EventsSection events={filteredEvents} />
+      </FadeIn>
 
       {/* Meet the Team */}
       <Section id="team" bg="white">

@@ -1,6 +1,5 @@
 import Section from "../layout/Section";
 import AboutCard from "../ui/AboutCard";
-import TeamSection from "./TeamSection";
 import { aboutCardData } from "../../data/AboutCardData";
 
 function AboutSection() {

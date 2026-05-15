@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Section from "../layout/Section";
 import EventList from "../ui/EventList";
 import EmptyState from "../ui/EmptyState";
@@ -21,12 +22,12 @@ function EventsSection({ events }) {
 
           {events.length > 3 && (
             <div className="mt-8 text-center">
-              <a
-                href="/events"
+              <Link
+                to="/events"
                 className="inline-block px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-400 transition-colors"
               >
                 View All Events
-              </a>
+              </Link>
             </div>
           )}
         </div>

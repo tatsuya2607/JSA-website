@@ -5,7 +5,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 const navigation = [
   { name: 'Home', to: '/', end: true },
   { name: 'Events', to: '/events' },
-  { name: 'Culture', to: '/culture' },
+  { name: 'Culture', to: '/#culture' },
 ]
 
 function getLinkClass(isActive) {

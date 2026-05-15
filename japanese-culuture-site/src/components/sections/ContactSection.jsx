@@ -1,5 +1,3 @@
-// components/ContactSection.jsx
-
 import { EnvelopeIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import FadeIn from "../ui/FadeIn";
@@ -47,13 +45,6 @@ function ContactSection({ bg = "white" }) {
                             <p className="text-sm font-medium text-indigo-600">jsa@university.edu</p>
                         </a>
                     </FadeIn>
-
-                    {/* <div 
-                                className={`group flex flex-col items-center justify-center rounded-2xl ${cardBg} p-8
-                                    shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1
-                                `}>
-                                <UserGroupIcon className="h-6 w-6" />
-                            </div> */}
 
                     <FadeIn delay={400} direction="up">
                         <div
