@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const dashboardCards = [
-        {
+    {
         title: "Events Management",
         description: "Create events and review their publish status.",
         icon: CalendarDaysIcon,

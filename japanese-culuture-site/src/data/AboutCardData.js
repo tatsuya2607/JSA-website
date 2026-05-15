@@ -25,7 +25,3 @@ export const aboutCardData = [
     description: "Immersive cultural experiences from tea ceremony to martial arts, calligraphy to anime appreciation.",
   }
 ];
-
-
-
-
