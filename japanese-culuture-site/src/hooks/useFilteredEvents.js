@@ -1,4 +1,3 @@
-// hooks/useFilteredEvents.js
 import { useMemo } from "react";
 import { toCategoryLabel } from "../constants/eventSchema";
 

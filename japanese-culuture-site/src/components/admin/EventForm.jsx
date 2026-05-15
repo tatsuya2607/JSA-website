@@ -20,108 +20,128 @@ function EventForm({
             </h1>
 
             {/* Title */}
-            <input
-                maxLength={50}
-                minLength={3}
-                required
-                value={formData.title}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, title: e.target.value }))
-                }
-                placeholder="Title"
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
-            <p className="text-xs text-gray-400">
-                {formData.title.length}/50
-            </p>
+            <div>
+                <label htmlFor="event-title" className="mb-1 block text-sm font-medium text-slate-700">Title</label>
+                <input
+                    id="event-title"
+                    maxLength={50}
+                    minLength={3}
+                    required
+                    value={formData.title}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, title: e.target.value }))
+                    }
+                    placeholder="Title"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                />
+                <p className="mt-1 text-xs text-gray-400">{formData.title.length}/50</p>
+            </div>
 
             {/* Date */}
-            <input
-                required
-                type="datetime-local"
-                value={formData.startAt}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, startAt: e.target.value }))
-                }
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
+            <div>
+                <label htmlFor="event-start" className="mb-1 block text-sm font-medium text-slate-700">Date & Time</label>
+                <input
+                    id="event-start"
+                    required
+                    type="datetime-local"
+                    value={formData.startAt}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, startAt: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                />
+            </div>
 
             {/* Category */}
-            <select
-                required
-                value={formData.category}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, category: e.target.value }))
-                }
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            >
-                <option value="">Select a category</option>
-                {EVENT_CATEGORIES.map((category) => (
-                    <option key={category} value={category}>
-                        {toCategoryLabel(category)}
-                    </option>
-                ))}
-            </select>
+            <div>
+                <label htmlFor="event-category" className="mb-1 block text-sm font-medium text-slate-700">Category</label>
+                <select
+                    id="event-category"
+                    required
+                    value={formData.category}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, category: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                >
+                    <option value="">Select a category</option>
+                    {EVENT_CATEGORIES.map((category) => (
+                        <option key={category} value={category}>
+                            {toCategoryLabel(category)}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             {/* Venue */}
-            <input
-                maxLength={50}
-                minLength={2}
-                value={formData.venueName}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, venueName: e.target.value }))
-                }
-                placeholder="Venue"
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
-
-            <p className="text-xs text-gray-400">
-                {formData.venueName.length}/50
-            </p>
+            <div>
+                <label htmlFor="event-venue" className="mb-1 block text-sm font-medium text-slate-700">Venue</label>
+                <input
+                    id="event-venue"
+                    maxLength={50}
+                    minLength={2}
+                    value={formData.venueName}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, venueName: e.target.value }))
+                    }
+                    placeholder="Venue"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                />
+                <p className="mt-1 text-xs text-gray-400">{formData.venueName.length}/50</p>
+            </div>
 
             {/* Image */}
-            <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
-            {isUploadingImage && (
-                <p className="text-sm text-slate-500">Uploading image...</p>
-            )}
+            <div>
+                <label htmlFor="event-image" className="mb-1 block text-sm font-medium text-slate-700">Image</label>
+                <input
+                    id="event-image"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                />
+                {isUploadingImage && (
+                    <p className="mt-1 text-sm text-slate-500">Uploading image...</p>
+                )}
+            </div>
 
             {/* Summary */}
-            <textarea
-                required
-                maxLength={200}
-                minLength={10}
-                value={formData.summary}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, summary: e.target.value }))
-                }
-                placeholder="Summary"
-                className="h-28 w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
-
-            <p className="text-xs text-gray-400">
-                {formData.summary.length}/200
-            </p>
+            <div>
+                <label htmlFor="event-summary" className="mb-1 block text-sm font-medium text-slate-700">Summary</label>
+                <textarea
+                    id="event-summary"
+                    required
+                    maxLength={200}
+                    minLength={10}
+                    value={formData.summary}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, summary: e.target.value }))
+                    }
+                    placeholder="Summary"
+                    className="h-28 w-full rounded-lg border border-slate-300 px-3 py-2"
+                />
+                <p className="mt-1 text-xs text-gray-400">{formData.summary.length}/200</p>
+            </div>
 
             {/* Status */}
-            <select
-                value={formData.status}
-                onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, status: e.target.value }))
-                }
-                className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            >
-                <option value="">Select status</option>
-                {EVENT_STATUSES.map((status) => (
-                    <option key={status} value={status}>
-                        {status}
-                    </option>
-                ))}
-            </select>
+            <div>
+                <label htmlFor="event-status" className="mb-1 block text-sm font-medium text-slate-700">Status</label>
+                <select
+                    id="event-status"
+                    value={formData.status}
+                    onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, status: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-slate-300 px-3 py-2"
+                >
+                    <option value="">Select status</option>
+                    {EVENT_STATUSES.map((status) => (
+                        <option key={status} value={status}>
+                            {status}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             {/* Buttons */}
             <button

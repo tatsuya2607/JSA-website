@@ -21,8 +21,12 @@ function AdminNavbar() {
   const navigate = useNavigate();
 
   async function handleLogout() {
-    await signOut(auth);
-    navigate("/admin-login");
+    try {
+      await signOut(auth);
+      navigate("/admin-login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   }
 
   return (
