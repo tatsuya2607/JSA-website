@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function AdminTeamMemberCard({
   member,
@@ -7,6 +7,10 @@ function AdminTeamMemberCard({
   handleQuickOrderUpdate,
 }) {
   const [order, setOrder] = useState(Number(member.order ?? 0));
+
+  useEffect(() => {
+    setOrder(Number(member.order ?? 0));
+  }, [member.order]);
   return (
     <li className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:flex-row md:items-center">
       {member.imageUrl ? (
