@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FadeIn from "./FadeIn";
 
 function EmptyState({
@@ -45,12 +46,12 @@ function EmptyState({
 
       {/* Button（optional） */}
       {buttonText && buttonLink && (
-        <a
-          href={buttonLink}
+        <Link
+          to={buttonLink}
           className="mt-6 inline-block rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700 transition"
         >
           {buttonText}
-        </a>
+        </Link>
       )}
     </FadeIn>
   );
