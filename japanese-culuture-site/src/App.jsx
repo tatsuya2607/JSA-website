@@ -13,7 +13,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute'
 
 function App() {
   const { pathname } = useLocation();
-  const isAdminRoute = pathname.startsWith('/admin');
+  const isAdminRoute = pathname.startsWith('/admin') && pathname !== '/admin-login';
 
   return (
     <>

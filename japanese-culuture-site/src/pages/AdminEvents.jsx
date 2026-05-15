@@ -23,6 +23,7 @@ const defaultFormData = {
 function AdminEvents() {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState(defaultFormData);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -48,6 +49,8 @@ function AdminEvents() {
         await refreshData();
       } catch (error) {
         setErrorMessage(error.message || "Failed to load events.");
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -189,6 +192,7 @@ function AdminEvents() {
         {/* Event List */}
         <EventListAdmin
           events={events}
+          isLoading={isLoading}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           errorMessage={errorMessage}

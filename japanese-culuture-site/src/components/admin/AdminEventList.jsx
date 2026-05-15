@@ -2,6 +2,7 @@ import EventItemCard from "./EventItemCard";
 
 function AdminEventList({
     events,
+    isLoading,
     handleEdit,
     handleDelete,
     errorMessage,
@@ -22,16 +23,20 @@ function AdminEventList({
                 <p className="mb-3 text-sm text-emerald-600">{successMessage}</p>
             )}
 
-            <ul className="space-y-3">
-                {events.map((event) => (
-                    <EventItemCard
-                        key={event.id}
-                        event={event}
-                        handleEdit={handleEdit}
-                        handleDelete={handleDelete}
-                    />
-                ))}
-            </ul>
+            {isLoading ? (
+                <p className="text-slate-500">Loading events...</p>
+            ) : (
+                <ul className="space-y-3">
+                    {events.map((event) => (
+                        <EventItemCard
+                            key={event.id}
+                            event={event}
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }

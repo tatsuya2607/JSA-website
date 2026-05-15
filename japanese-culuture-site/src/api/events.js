@@ -12,7 +12,12 @@ import { db } from "../firebase/firebase";
 import { normalizeEventPayload } from "../constants/eventSchema";
 
 function byStartAtAscending(a, b) {
-  return new Date(a.startAt).getTime() - new Date(b.startAt).getTime();
+  const ta = new Date(a.startAt).getTime();
+  const tb = new Date(b.startAt).getTime();
+  if (Number.isNaN(ta) && Number.isNaN(tb)) return 0;
+  if (Number.isNaN(ta)) return 1;
+  if (Number.isNaN(tb)) return -1;
+  return ta - tb;
 }
 
 export async function getEvents({ includeDrafts = false } = {}) {

@@ -5,7 +5,6 @@ import ContactSection from "../components/sections/ContactSection";
 import TeamSection from "../components/sections/TeamSection";
 
 import useEvents from "../hooks/useEvents";
-import useFilteredEvents from "../hooks/useFilteredEvents";
 
 import Hero from "../components/layout/Hero";
 import Section from "../components/layout/Section";
@@ -18,8 +17,6 @@ import FadeIn from "../components/ui/FadeIn";
 function Home() {
   const { events } = useEvents();
   const { hash } = useLocation();
-
-  const filteredEvents = useFilteredEvents(events, "All");
 
   useEffect(() => {
     if (!hash) return;
@@ -54,7 +51,7 @@ function Home() {
 
       {/* Upcoming Events */}
       <FadeIn delay={200} direction="up">
-        <EventsSection events={filteredEvents} />
+        <EventsSection events={events} />
       </FadeIn>
 
       {/* Meet the Team */}
