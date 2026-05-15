@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 function AdminTeamMemberCard({
   member,
   beginEdit,
   handleDelete,
   handleQuickOrderUpdate,
 }) {
+  const [order, setOrder] = useState(Number(member.order ?? 0));
   return (
     <li className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:flex-row md:items-center">
       {member.imageUrl ? (
@@ -27,16 +30,16 @@ function AdminTeamMemberCard({
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+        <label htmlFor={`order-${member.id}`} className="text-xs font-semibold uppercase tracking-wide text-slate-500">
           Order
         </label>
 
         <input
+          id={`order-${member.id}`}
           type="number"
-          defaultValue={Number(member.order ?? 0)}
-          onBlur={(event) =>
-            handleQuickOrderUpdate(member, event.target.value)
-          }
+          value={order}
+          onChange={(event) => setOrder(Number(event.target.value))}
+          onBlur={(event) => handleQuickOrderUpdate(member, event.target.value)}
           className="w-20 rounded-md border border-slate-300 px-2 py-1 text-sm"
         />
 

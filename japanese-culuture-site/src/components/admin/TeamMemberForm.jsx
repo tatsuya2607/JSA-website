@@ -18,65 +18,84 @@ function TeamMemberForm({
         Admin: Team Manager
       </h1>
 
-      <input
-        required
-        value={formData.name}
-        onChange={(event) =>
-          setFormData((prev) => ({ ...prev, name: event.target.value }))
-        }
-        placeholder="Name"
-        className="w-full rounded-lg border border-slate-300 px-3 py-2"
-      />
+      <div>
+        <label htmlFor="member-name" className="mb-1 block text-sm font-medium text-slate-700">Name</label>
+        <input
+          id="member-name"
+          required
+          value={formData.name}
+          onChange={(event) =>
+            setFormData((prev) => ({ ...prev, name: event.target.value }))
+          }
+          placeholder="Name"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
 
-      <input
-        required
-        value={formData.role}
-        onChange={(event) =>
-          setFormData((prev) => ({ ...prev, role: event.target.value }))
-        }
-        placeholder="Role"
-        className="w-full rounded-lg border border-slate-300 px-3 py-2"
-      />
+      <div>
+        <label htmlFor="member-role" className="mb-1 block text-sm font-medium text-slate-700">Role</label>
+        <input
+          id="member-role"
+          required
+          value={formData.role}
+          onChange={(event) =>
+            setFormData((prev) => ({ ...prev, role: event.target.value }))
+          }
+          placeholder="Role"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
 
-      <input
-        required
-        value={formData.message}
-        onChange={(event) =>
-          setFormData((prev) => ({ ...prev, message: event.target.value }))
-        }
-        placeholder="Message (1 line)"
-        maxLength={120}
-        className="w-full rounded-lg border border-slate-300 px-3 py-2"
-      />
+      <div>
+        <label htmlFor="member-message" className="mb-1 block text-sm font-medium text-slate-700">Message</label>
+        <input
+          id="member-message"
+          required
+          value={formData.message}
+          onChange={(event) =>
+            setFormData((prev) => ({ ...prev, message: event.target.value }))
+          }
+          placeholder="Message (1 line)"
+          maxLength={120}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        className="w-full rounded-lg border border-slate-300 px-3 py-2"
-      />
-
-      {isUploadingImage && (
-        <p className="text-sm text-slate-500">Uploading image...</p>
-      )}
+      <div>
+        <label htmlFor="member-image" className="mb-1 block text-sm font-medium text-slate-700">Image</label>
+        <input
+          id="member-image"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+        {isUploadingImage && (
+          <p className="mt-1 text-sm text-slate-500">Uploading image...</p>
+        )}
+      </div>
 
       {uploadError && (
         <p className="text-sm text-rose-600">{uploadError}</p>
       )}
 
-      <input
-        required
-        type="number"
-        value={formData.order}
-        onChange={(event) =>
-          setFormData((prev) => ({
-            ...prev,
-            order: Number(event.target.value),
-          }))
-        }
-        placeholder="Order"
-        className="w-full rounded-lg border border-slate-300 px-3 py-2"
-      />
+      <div>
+        <label htmlFor="member-order" className="mb-1 block text-sm font-medium text-slate-700">Order</label>
+        <input
+          id="member-order"
+          required
+          type="number"
+          value={formData.order}
+          onChange={(event) =>
+            setFormData((prev) => ({
+              ...prev,
+              order: Number(event.target.value),
+            }))
+          }
+          placeholder="Order"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
 
       <div className="flex flex-wrap gap-3">
         <button
