@@ -25,9 +25,14 @@ function EventDetail() {
   useEffect(() => {
     async function fetchEvent() {
       setIsLoading(true);
-      const data = await getEventById(id);
-      setEvent(data);
-      setIsLoading(false);
+      try {
+        const data = await getEventById(id);
+        setEvent(data);
+      } catch (error) {
+        console.error("Failed to fetch event:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchEvent();

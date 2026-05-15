@@ -8,9 +8,14 @@ function TeamSection() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchMembers();
-      setTeamMembers(data);
-      setLoading(false);
+      try {
+        const data = await fetchMembers();
+        setTeamMembers(data);
+      } catch (error) {
+        console.error("Failed to fetch team members:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
