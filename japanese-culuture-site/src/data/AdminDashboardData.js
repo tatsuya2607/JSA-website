@@ -2,7 +2,6 @@ import {
     CalendarDaysIcon,
     DocumentTextIcon,
     UsersIcon,
-    ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 
 export const dashboardCards = [
