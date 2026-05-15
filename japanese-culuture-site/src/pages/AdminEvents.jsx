@@ -200,7 +200,11 @@ function AdminEvents() {
         />
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        label={editingEventId ? "Edit Event" : "Create Event"}
+      >
         <EventForm
           formData={formData}
           setFormData={setFormData}
@@ -209,6 +213,7 @@ function AdminEvents() {
           isSaving={isSaving}
           isUploadingImage={isUploadingImage}
           editingEventId={editingEventId}
+          errorMessage={errorMessage}
           resetForm={() => {
             resetForm();
             setIsModalOpen(false);

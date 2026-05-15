@@ -6,7 +6,7 @@ function TeamMemberForm({
   isSaving,
   isEditing,
   isUploadingImage,
-  uploadError,
+  formError,
   resetForm,
 }) {
   return (
@@ -75,8 +75,8 @@ function TeamMemberForm({
         )}
       </div>
 
-      {uploadError && (
-        <p className="text-sm text-rose-600">{uploadError}</p>
+      {formError && (
+        <p className="text-sm text-rose-600">{formError}</p>
       )}
 
       <div>

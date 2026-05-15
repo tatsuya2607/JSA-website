@@ -23,19 +23,23 @@ function EventDetail() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
     async function fetchEvent() {
       setIsLoading(true);
       try {
         const data = await getEventById(id);
-        setEvent(data);
+        if (!ignore) setEvent(data);
       } catch (error) {
         console.error("Failed to fetch event:", error);
       } finally {
-        setIsLoading(false);
+        if (!ignore) setIsLoading(false);
       }
     }
 
     fetchEvent();
+    return () => {
+      ignore = true;
+    };
   }, [id]);
 
   if (isLoading) {

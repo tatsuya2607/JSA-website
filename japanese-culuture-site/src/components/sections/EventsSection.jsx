@@ -3,7 +3,7 @@ import Section from "../layout/Section";
 import EventList from "../ui/EventList";
 import EmptyState from "../ui/EmptyState";
 
-function EventsSection({ events }) {
+function EventsSection({ events, loading }) {
   return (
     <Section id="events" bg="gray">
       <div className="text-center">
@@ -16,7 +16,9 @@ function EventsSection({ events }) {
         </p>
       </div>
 
-      {events.length > 0 ? (
+      {loading ? (
+        <p className="mt-12 text-center text-gray-500">Loading...</p>
+      ) : events.length > 0 ? (
         <div className="mt-12 w-full max-w-6xl mx-auto">
           <EventList events={events.slice(0, 3)} />
 

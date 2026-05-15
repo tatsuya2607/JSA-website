@@ -24,7 +24,7 @@ function AdminTeamManager() {
   const [isSaving, setIsSaving] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [uploadError, setUploadError] = useState("");
+  const [formError, setFormError] = useState("");
 
   const isEditing = Boolean(editingId);
 
@@ -40,7 +40,7 @@ function AdminTeamManager() {
       try {
         await loadMembers();
       } catch (error) {
-        setUploadError(error.message || "Failed to load team members.");
+        setFormError(error.message || "Failed to load team members.");
       } finally {
         setIsLoading(false);
       }
@@ -68,7 +68,7 @@ function AdminTeamManager() {
   async function handleSubmit(event) {
     event.preventDefault();
     setIsSaving(true);
-    setUploadError("");
+    setFormError("");
 
     try {
       if (isEditing) {
@@ -80,7 +80,7 @@ function AdminTeamManager() {
       await loadMembers();
       resetForm();
     } catch (error) {
-      setUploadError(error.message || "Failed to save team member.");
+      setFormError(error.message || "Failed to save team member.");
     } finally {
       setIsSaving(false);
     }
@@ -91,13 +91,13 @@ function AdminTeamManager() {
     if (!file) return;
 
     setIsUploadingImage(true);
-    setUploadError("");
+    setFormError("");
 
     try {
       const uploadedUrl = await uploadImageFile(file, "teamMembers");
       setFormData((prev) => ({ ...prev, imageUrl: uploadedUrl }));
     } catch (error) {
-      setUploadError(error.message || "Failed to upload image.");
+      setFormError(error.message || "Failed to upload image.");
     } finally {
       setIsUploadingImage(false);
       event.target.value = "";
@@ -116,7 +116,7 @@ function AdminTeamManager() {
         resetForm();
       }
     } catch (error) {
-      setUploadError(error.message || "Failed to delete team member.");
+      setFormError(error.message || "Failed to delete team member.");
     }
   }
 
@@ -129,7 +129,7 @@ function AdminTeamManager() {
 
       await loadMembers();
     } catch (error) {
-      setUploadError(error.message || "Failed to update order.");
+      setFormError(error.message || "Failed to update order.");
     }
   }
 
@@ -143,7 +143,7 @@ function AdminTeamManager() {
         isSaving={isSaving}
         isEditing={isEditing}
         isUploadingImage={isUploadingImage}
-        uploadError={uploadError}
+        formError={formError}
         resetForm={resetForm}
       />
 

@@ -8,6 +8,7 @@ function EventForm({
     isSaving,
     isUploadingImage,
     editingEventId,
+    errorMessage,
     resetForm,
 }) {
     return (
@@ -18,6 +19,12 @@ function EventForm({
             <h1 className="text-2xl font-bold text-slate-800">
                 {editingEventId ? "Edit Event" : "Create Event"}
             </h1>
+
+            {errorMessage && (
+                <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+                    {errorMessage}
+                </p>
+            )}
 
             {/* Title */}
             <div>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function Modal({ isOpen, onClose, children }) {
+function Modal({ isOpen, onClose, children, labelledBy, label }) {
   useEffect(() => {
     if (!isOpen) return;
     function handleKeyDown(event) {
@@ -10,12 +10,23 @@ function Modal({ isOpen, onClose, children }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby={labelledBy}
+      aria-label={labelledBy ? undefined : label}
       className="fixed inset-0 z-50 flex items-center justify-center"
     >
       {/* Background */}

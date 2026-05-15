@@ -15,7 +15,7 @@ import FadeIn from "../components/ui/FadeIn";
 
 
 function Home() {
-  const { events } = useEvents();
+  const { events, loading } = useEvents();
   const { hash } = useLocation();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function Home() {
 
       {/* Upcoming Events */}
       <FadeIn delay={200} direction="up">
-        <EventsSection events={events} />
+        <EventsSection events={events} loading={loading} />
       </FadeIn>
 
       {/* Meet the Team */}
