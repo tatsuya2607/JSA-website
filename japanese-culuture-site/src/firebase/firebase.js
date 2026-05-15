@@ -1,17 +1,15 @@
-// src/firebase/firebase.js
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD1JgowtUSsM2UZZC4ttBGDKnpwAtDsJiY",
-  authDomain: "japanese-culture-96191.firebaseapp.com",
-  projectId: "japanese-culture-96191",
-  storageBucket: "japanese-culture-96191.firebasestorage.app",
-  messagingSenderId: "919380102898",
-  appId: "1:919380102898:web:55bf3c31e5585da91dca6b"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
