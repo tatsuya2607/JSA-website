@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Section from "../layout/Section";
 import EventList from "../ui/EventList";
+import EventListSkeleton from "../ui/EventListSkeleton";
 import EmptyState from "../ui/EmptyState";
 
 function EventsSection({ events, loading }) {
@@ -17,7 +18,9 @@ function EventsSection({ events, loading }) {
       </div>
 
       {loading ? (
-        <p className="mt-12 text-center text-gray-500">Loading...</p>
+        <div className="mt-12 w-full max-w-6xl mx-auto">
+          <EventListSkeleton count={3} />
+        </div>
       ) : events.length > 0 ? (
         <div className="mt-12 w-full max-w-6xl mx-auto">
           <EventList events={events.slice(0, 3)} />

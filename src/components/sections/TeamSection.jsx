@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchMembers } from "../../api/teamMembers";
+import TeamMemberSkeleton from "../ui/TeamMemberSkeleton";
 
 function TeamSection() {
 
@@ -29,9 +30,10 @@ function TeamSection() {
 
         {/* Team Member Cards */}
         <div className="mt-10 flex flex-wrap justify-center gap-6">
-          {loading && (
-            <p className="text-gray-500">Loading...</p>
-          )}
+          {loading &&
+            Array.from({ length: 3 }).map((_, index) => (
+              <TeamMemberSkeleton key={index} />
+            ))}
           {teamMembers.map((member) => (
             <article
               key={member.id}

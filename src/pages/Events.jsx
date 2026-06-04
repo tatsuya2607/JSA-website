@@ -8,6 +8,7 @@ import useEvents from "../hooks/useEvents";
 import useFilteredEvents from "../hooks/useFilteredEvents";
 import { getCategories } from "../utils/getCategories";
 import EventList from "../components/ui/EventList";
+import EventListSkeleton from "../components/ui/EventListSkeleton";
 import EmptyState from "../components/ui/EmptyState";
 import FilterDropdown from "../components/ui/FilterDropdown";
 import Hero from "../components/layout/Hero";
@@ -113,7 +114,7 @@ function Events() {
         {/* Events Grid */}
         <div className="mx-auto max-w-6xl">
           {loading ? (
-            <p className="text-center text-gray-500">Loading...</p>
+            <EventListSkeleton count={6} />
           ) : filteredEvents.length > 0 ? (
             <EventList events={filteredEvents} />
           ) : (
