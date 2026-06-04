@@ -10,6 +10,18 @@ Deployed on Vercel:
 
 - **Live site**: https://jsa-website-ivory.vercel.app
 
+### 🔑 Admin demo
+
+This is a portfolio project (not a real, in-use site), so a demo admin account
+is shared publicly to let visitors explore the authenticated admin dashboard.
+
+- **Admin login**: https://jsa-website-ivory.vercel.app/admin-login
+- **Email**: `admin@test.com`
+- **Password**: `111111`
+
+> ⚠️ Demo only. Data may be changed or reset by anyone, since the credentials
+> are public. Don't store anything important here.
+
 ---
 
 ## ✨ Features
@@ -137,6 +149,18 @@ React + Vite + Firebase で構築した、JSA（Japanese Student Association）�
 Vercel にデプロイしています:
 
 - **公開サイト**: https://jsa-website-ivory.vercel.app
+
+### 🔑 管理画面デモ
+
+本サイトは実運用しておらず、ポートフォリオ用に作成したものです。ご覧いただいた方が
+認証付きの管理画面を実際に確認できるよう、デモ用の管理者アカウントを公開しています。
+
+- **管理ログイン**: https://jsa-website-ivory.vercel.app/admin-login
+- **メールアドレス**: `admin@test.com`
+- **パスワード**: `111111`
+
+> ⚠️ デモ用です。認証情報が公開されているため、データは誰でも変更・削除できます。
+> 重要な情報は登録しないでください。
 
 ---
 
