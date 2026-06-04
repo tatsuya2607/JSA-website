@@ -15,10 +15,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Some networks/proxies abort Firestore's streaming WebChannel transport,
-// which makes reads hang forever with no error. Auto-detect that and fall
-// back to long polling.
+// which makes reads hang forever with no error. Force long polling so reads
+// use plain request/response and always complete. (Public pages only do
+// one-time getDocs reads, so we don't need streaming.)
 export const db = initializeFirestore(app, {
-  experimentalAutoDetectLongPolling: true,
+  experimentalForceLongPolling: true,
 });
 export const auth = getAuth(app);
 export const storage = getStorage(app);
