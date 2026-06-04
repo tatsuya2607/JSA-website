@@ -6,9 +6,9 @@ An introduction and event-management web app for a JSA (Japanese Student Associa
 
 ## 🔗 Live Demo
 
-> Deployed on Vercel. Replace the placeholder below with your production URL after deploying.
+Deployed on Vercel:
 
-- **Live site**: `https://<your-project>.vercel.app`
+- **Live site**: https://jsa-website-ivory.vercel.app
 
 ---
 
@@ -134,9 +134,9 @@ React + Vite + Firebase で構築した、JSA（Japanese Student Association）�
 
 ## 🔗 ライブデモ
 
-> Vercel にデプロイしています。デプロイ後、下記プレースホルダーを本番 URL に置き換えてください。
+Vercel にデプロイしています:
 
-- **公開サイト**: `https://<your-project>.vercel.app`
+- **公開サイト**: https://jsa-website-ivory.vercel.app
 
 ---
 
