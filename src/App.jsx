@@ -10,6 +10,7 @@ import Admin from './pages/Admin'
 import AdminLogin from './pages/AdminLogin'
 import AdminTeam from './pages/AdminTeam'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import ScrollToTop from './components/layout/ScrollToTop'
 
 function App() {
   const { pathname } = useLocation();
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!isAdminRoute && <Header />}
       {isAdminRoute && <AdminNavbar />}
 
