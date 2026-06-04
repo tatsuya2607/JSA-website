@@ -3,12 +3,11 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
-  getDocs,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { restGetCollection, restGetDocument } from "../firebase/firestoreRest";
 import { normalizeEventPayload } from "../constants/eventSchema";
 
 function byStartAtAscending(a, b) {
@@ -21,12 +20,7 @@ function byStartAtAscending(a, b) {
 }
 
 export async function getEvents({ includeDrafts = false } = {}) {
-  const snapshot = await getDocs(collection(db, "events"));
-
-  const events = snapshot.docs.map((snapshotDoc) => ({
-    id: snapshotDoc.id,
-    ...snapshotDoc.data(),
-  }));
+  const events = await restGetCollection("events");
 
   return events
     .filter((event) => includeDrafts || event.status === "published")
@@ -34,13 +28,7 @@ export async function getEvents({ includeDrafts = false } = {}) {
 }
 
 export async function getEventById(id) {
-  const snapshot = await getDoc(doc(db, "events", id));
-  if (!snapshot.exists()) return null;
-
-  return {
-    id: snapshot.id,
-    ...snapshot.data(),
-  };
+  return restGetDocument("events", id);
 }
 
 export async function createEvent(payload) {

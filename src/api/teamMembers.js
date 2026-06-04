@@ -3,13 +3,11 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDocs,
-  orderBy,
-  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { restGetCollection } from "../firebase/firestoreRest";
 
 const teamMembersCollection = collection(db, "teamMembers");
 
@@ -29,14 +27,14 @@ function normalizeMemberPayload(payload) {
 }
 
 export async function fetchMembers() {
-  const membersQuery = query(teamMembersCollection, orderBy("order", "asc"), orderBy("createdAt", "asc"));
-  const snapshot = await getDocs(membersQuery);
+  const members = await restGetCollection("teamMembers");
 
-  return snapshot.docs.map((snapshotDoc) => ({
-    id: snapshotDoc.id,
-    ...snapshotDoc.data(),
-    order: toNumber(snapshotDoc.data().order),
-  }));
+  return members
+    .map((member) => ({ ...member, order: toNumber(member.order) }))
+    .sort((a, b) => {
+      if (a.order !== b.order) return a.order - b.order;
+      return String(a.createdAt ?? "").localeCompare(String(b.createdAt ?? ""));
+    });
 }
 
 export async function addMember(payload) {
