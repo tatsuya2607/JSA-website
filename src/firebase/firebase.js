@@ -1,25 +1,27 @@
 import { initializeApp } from "firebase/app";
-import { initializeFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
+// Some env sources (e.g. values imported with a UTF-8 BOM) prepend a BOM
+// (U+FEFF) to the value, which makes the project id / API key invalid and
+// causes Firestore to fail with PERMISSION_DENIED. Strip it defensively.
+const clean = (value) => (value ?? "").replace(/^\uFEFF/, "").trim();
+
+export const firebaseProjectId = clean(import.meta.env.VITE_FIREBASE_PROJECT_ID);
+export const firebaseApiKey = clean(import.meta.env.VITE_FIREBASE_API_KEY);
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: firebaseApiKey,
+  authDomain: clean(import.meta.env.VITE_FIREBASE_AUTH_DOMAIN),
+  projectId: firebaseProjectId,
+  storageBucket: clean(import.meta.env.VITE_FIREBASE_STORAGE_BUCKET),
+  messagingSenderId: clean(import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID),
+  appId: clean(import.meta.env.VITE_FIREBASE_APP_ID),
 };
 
 const app = initializeApp(firebaseConfig);
 
-// Some networks/proxies abort Firestore's streaming WebChannel transport,
-// which makes reads hang forever with no error. Force long polling so reads
-// use plain request/response and always complete. (Public pages only do
-// one-time getDocs reads, so we don't need streaming.)
-export const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true,
-});
+export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);

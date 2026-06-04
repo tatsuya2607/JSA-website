@@ -3,9 +3,10 @@
 // channel is aborted repeatedly and getDocs hangs forever; plain REST
 // request/response always completes. Security Rules still apply.
 
-const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
-const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
-const BASE = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
+import { firebaseProjectId, firebaseApiKey } from "./firebase";
+
+const apiKey = firebaseApiKey;
+const BASE = `https://firestore.googleapis.com/v1/projects/${firebaseProjectId}/databases/(default)/documents`;
 
 function convertValue(value) {
   if (value == null) return null;
